@@ -8,11 +8,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!session) {
       console.error('No valid access token found in session');
-      res.status(401).json({ message: 'Unauthorized' });
+      res.status(401).json(
+        { message: 'Unauthorized' }
+      );
       return;
     }
 
-    const apiUrl = 'https://api.github.com/user/repos';
+    const apiUrl:string = 'https://api.github.com/user/repos';
 
     console.log('Fetching repositories with access token:', session.accessToken);
 
@@ -30,7 +32,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json(repositories);
   } catch (error) {
     console.error('Error fetching repositories:', error);
-    res.status(500).json({ message: 'Failed to fetch repositories' });
+    res.status(500).json(
+      { message: 'Failed to fetch repositories' }
+    );
   }
 };
 
