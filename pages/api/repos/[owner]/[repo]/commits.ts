@@ -12,7 +12,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    const { owner, repo } = req.query;
+    const { 
+      owner,
+      repo 
+    } = req.query;
+
+    if (!owner || !repo) {
+      res.status(400).json(
+        { message: "Invalid query" }
+      );
+      return;
+    }
+
+    if (typeof owner !== "string" || typeof repo !== "string") {
+      res.status(400).json(
+        { message: "Invalid type query" }
+      );
+      return;
+    }
 
     const apiUrl : string = `https://api.github.com/repos/${owner}/${repo}/commits`;
 

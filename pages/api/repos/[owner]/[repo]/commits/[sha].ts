@@ -10,7 +10,25 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
 
-    const { owner, repo, sha } = req.query;
+    const {
+      owner, 
+      repo, 
+      sha 
+    } = req.query;
+
+    if (!owner || !repo || !sha) {
+      res.status(400).json(
+        { message: "Invalid query" }
+      );
+      return;
+    }
+
+    if (typeof owner !== "string" || typeof repo !== "string" || typeof sha !== "string") {
+      res.status(400).json(
+        { message: "Invalid type query" }
+      );
+      return;
+    }
 
     const apiUrl: string = `https://api.github.com/repos/${owner}/${repo}/commits/${sha}`;
 
@@ -25,7 +43,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const commit = await response.json();
-    res.status(200).json(commit.files);
+    res.status(200).json(commit);
   } catch (error) {
     res.status(500).json(
         { message: "Failed to fetch commit files" }
