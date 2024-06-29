@@ -1,7 +1,6 @@
-// api/openapi.js (ou api/openapi.ts si vous utilisez TypeScript)
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
-import fs from 'fs/promises'; // Utilisation de fs.promises pour les opérations asynchrones
+import fs from 'fs/promises';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
