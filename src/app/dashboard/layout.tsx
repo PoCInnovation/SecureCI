@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/ui/side-bar"
+import { SideBar } from "../../components/ui/side-bar"
 
 export const metadata = {
     title: 'Next.js',

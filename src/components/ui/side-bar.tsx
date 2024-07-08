@@ -1,3 +1,4 @@
+"use client"
 import { Link } from "lucide-react"
 import { buttonVariants } from "./buttons/button"
 import { ButtonLink } from "./buttons/button-link"
@@ -8,8 +9,9 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu/dropdown-menu"
+} from "./dropdown-menu/dropdown-menu"
 import { useState } from "react"
+import { signOut, useSession } from "next-auth/react"
 
 
 interface Organization {
@@ -22,6 +24,8 @@ interface SideBarChildrenProps {
 }
 
 const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
+    const { data: session } = useSession();
+
     return (
         <div class="h-screen w-screen bg-white dark:bg-slate-900">
             <aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-64 transition-transform" aria-label="Sidebar">
@@ -48,8 +52,10 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
                                     )
                                 })}
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>My Account</DropdownMenuItem>
-                                <DropdownMenuItem>Log out</DropdownMenuItem>
+                                <DropdownMenuItem>{session?.user?.name}</DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <p onClick={() => { signOut() }}>Log out</p>
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>

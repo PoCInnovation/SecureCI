@@ -1,10 +1,17 @@
-import { TypographyH1 } from "@/components/ui/typography/h1";
+import AuthButton from "@/components/auth/auth-button";
+import { Button } from "../components/ui/buttons/button";
+import { TypographyH1 } from "../components/ui/typography/h1";
+import { getServerSession } from "next-auth";
 
-const Home = () => {
+const Home = async () => {
+  const session = await getServerSession();
+
+
   return (
-    <div>
+    <>
       <TypographyH1>SecureCI</TypographyH1>
-    </div>
+      <AuthButton/>
+    </>
   );
 }
 
