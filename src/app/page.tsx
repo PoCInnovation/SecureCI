@@ -1,9 +1,10 @@
-import type { NextPage } from 'next'
-import Typography from '@mui/material/Typography';
+import { TypographyH1 } from "@/components/ui/typography/h1";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
-    <Typography variant="h2">Secure CI</Typography>
+    <div>
+      <TypographyH1>SecureCI</TypographyH1>
+    </div>
   );
 }
 
