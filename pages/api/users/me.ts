@@ -1,10 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
+import fetchURL from "../utils/utils";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (
+    req: NextApiRequest, res: NextApiResponse
+) => {
     try {
         const session: any = await getSession({ req });
-
         if (!session) {
             res.status(401).json(
                 { message: "Unauthorized" }
@@ -14,11 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         const apiUrl: string = "https://api.github.com/user";
 
-        const response: any = await fetch(apiUrl, {
-            headers: {
-                Authorization: `Bearer ${session.accessToken}`,
-            },
-        });
+        const response: any = await fetchURL(req, apiUrl);
 
         if (!response.ok) {
             throw new Error("Failed to fetch user");
@@ -28,7 +26,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(200).json(user);
     } catch (error) {
-        console.error("Error fetching user:", error);
         res.status(500).json(
             { message: "Failed to fetch user" }
         );

@@ -1,50 +1,51 @@
+// pages/api/repos/[owner]/[repo]/tags.ts
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
+import { z } from "zod";
+import fetchURL from "../../../utils/utils";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const querySchema = z.object({
+  owner: z.string(),
+  repo: z.string(),
+});
+
+const handler = async (
+  req: NextApiRequest, res: NextApiResponse
+) => {
   try {
     const session = await getSession({ req });
-
     if (!session) {
-      res.status(401).json({ message: "Unauthorized" });
+      res.status(401).json(
+        { message: "Unauthorized" }
+    );
       return;
     }
 
-    const { 
-      owner, 
-      repo 
-    } = req.query;
+    const result = querySchema.safeParse(req.query);
 
-    if (!owner || !repo) {
-      res.status(400).json(
-        { message: "Invalid query" }
-      );
+    if (!result.success) {
+      res.status(400).json({
+        message: "Invalid query",
+        errors: result.error.errors,
+      });
       return;
     }
 
-    if (typeof owner !== "string" || typeof repo !== "string") {
-      res.status(400).json(
-        { message: "Invalid type query" }
-      );
-      return;
-    }
+    const { owner, repo } = result.data
 
-    const apiUrl: string = `https://api.github.com/repos/${owner}/${repo}/tags`;
+    const encodedOwner : string = encodeURIComponent(owner);
+    const encodedRepo : string = encodeURIComponent(repo);
 
-    const response = await fetch(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-    });
+    const apiUrl : string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/tags`;
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch tags");
-    }
+    const response = await fetchURL(req, apiUrl);
 
-    const tags: object = await response.json();
+    const tags : object = await response.json();
     res.status(200).json(tags);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch tags" });
+    res.status(500).json(
+        { message: "Failed to fetch tags" }
+    );
   }
 };
 
