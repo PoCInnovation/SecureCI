@@ -21,5 +21,9 @@ export default function OpenApiDocsPage() {
     return <div>Loading...</div>;
   }
 
-  return <SwaggerUI spec={spec} displayOperationId={true} />;
+  return (
+    <div style={{colorScheme: "white"}}>
+      <SwaggerUI spec={spec} displayOperationId={true}/>
+    </div>
+  )
 }
