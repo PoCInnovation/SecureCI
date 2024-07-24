@@ -1,0 +1,1342 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/repos/repository": {
+      "get": {
+        "summary": "Fetch repositories for the authenticated user from GitHub",
+        "responses": {
+          "200": {
+            "description": "Successfully fetched repositories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "node_id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "full_name": {
+                        "type": "string"
+                      },
+                      "private": {
+                        "type": "boolean"
+                      },
+                      "owner": {
+                        "type": "object",
+                        "properties": {
+                          "login": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "number"
+                          },
+                          "node_id": {
+                            "type": "string"
+                          },
+                          "avatar_url": {
+                            "type": "string"
+                          },
+                          "gravatar_id": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "html_url": {
+                            "type": "string"
+                          },
+                          "followers_url": {
+                            "type": "string"
+                          },
+                          "following_url": {
+                            "type": "string"
+                          },
+                          "gists_url": {
+                            "type": "string"
+                          },
+                          "starred_url": {
+                            "type": "string"
+                          },
+                          "subscriptions_url": {
+                            "type": "string"
+                          },
+                          "organizations_url": {
+                            "type": "string"
+                          },
+                          "repos_url": {
+                            "type": "string"
+                          },
+                          "events_url": {
+                            "type": "string"
+                          },
+                          "received_events_url": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "site_admin": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "html_url": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "fork": {
+                        "type": "boolean"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "forks_url": {
+                        "type": "string"
+                      },
+                      "keys_url": {
+                        "type": "string"
+                      },
+                      "collaborators_url": {
+                        "type": "string"
+                      },
+                      "teams_url": {
+                        "type": "string"
+                      },
+                      "hooks_url": {
+                        "type": "string"
+                      },
+                      "issue_events_url": {
+                        "type": "string"
+                      },
+                      "events_url": {
+                        "type": "string"
+                      },
+                      "assignees_url": {
+                        "type": "string"
+                      },
+                      "branches_url": {
+                        "type": "string"
+                      },
+                      "tags_url": {
+                        "type": "string"
+                      },
+                      "blobs_url": {
+                        "type": "string"
+                      },
+                      "git_tags_url": {
+                        "type": "string"
+                      },
+                      "git_refs_url": {
+                        "type": "string"
+                      },
+                      "trees_url": {
+                        "type": "string"
+                      },
+                      "statuses_url": {
+                        "type": "string"
+                      },
+                      "languages_url": {
+                        "type": "string"
+                      },
+                      "stargazers_url": {
+                        "type": "string"
+                      },
+                      "contributors_url": {
+                        "type": "string"
+                      },
+                      "subscribers_url": {
+                        "type": "string"
+                      },
+                      "subscription_url": {
+                        "type": "string"
+                      },
+                      "commits_url": {
+                        "type": "string"
+                      },
+                      "git_commits_url": {
+                        "type": "string"
+                      },
+                      "comments_url": {
+                        "type": "string"
+                      },
+                      "issue_comment_url": {
+                        "type": "string"
+                      },
+                      "contents_url": {
+                        "type": "string"
+                      },
+                      "compare_url": {
+                        "type": "string"
+                      },
+                      "merges_url": {
+                        "type": "string"
+                      },
+                      "archive_url": {
+                        "type": "string"
+                      },
+                      "downloads_url": {
+                        "type": "string"
+                      },
+                      "issues_url": {
+                        "type": "string"
+                      },
+                      "pulls_url": {
+                        "type": "string"
+                      },
+                      "milestones_url": {
+                        "type": "string"
+                      },
+                      "notifications_url": {
+                        "type": "string"
+                      },
+                      "labels_url": {
+                        "type": "string"
+                      },
+                      "releases_url": {
+                        "type": "string"
+                      },
+                      "deployments_url": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "pushed_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "git_url": {
+                        "type": "string"
+                      },
+                      "ssh_url": {
+                        "type": "string"
+                      },
+                      "clone_url": {
+                        "type": "string"
+                      },
+                      "svn_url": {
+                        "type": "string"
+                      },
+                      "homepage": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "number"
+                      },
+                      "stargazers_count": {
+                        "type": "number"
+                      },
+                      "watchers_count": {
+                        "type": "number"
+                      },
+                      "language": {
+                        "type": "string"
+                      },
+                      "has_issues": {
+                        "type": "boolean"
+                      },
+                      "has_projects": {
+                        "type": "boolean"
+                      },
+                      "has_downloads": {
+                        "type": "boolean"
+                      },
+                      "has_wiki": {
+                        "type": "boolean"
+                      },
+                      "has_pages": {
+                        "type": "boolean"
+                      },
+                      "has_discussions": {
+                        "type": "boolean"
+                      },
+                      "forks_count": {
+                        "type": "number"
+                      },
+                      "mirror_url": {
+                        "type": "string"
+                      },
+                      "archived": {
+                        "type": "boolean"
+                      },
+                      "disabled": {
+                        "type": "boolean"
+                      },
+                      "open_issues_count": {
+                        "type": "number"
+                      },
+                      "license": {
+                        "type": "object",
+                        "nullable": true,
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "spdx_id": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "node_id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "allow_forking": {
+                        "type": "boolean"
+                      },
+                      "is_template": {
+                        "type": "boolean"
+                      },
+                      "web_commit_signoff_required": {
+                        "type": "boolean"
+                      },
+                      "topics": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "visibility": {
+                        "type": "string"
+                      },
+                      "forks": {
+                        "type": "number"
+                      },
+                      "open_issues": {
+                        "type": "number"
+                      },
+                      "watchers": {
+                        "type": "number"
+                      },
+                      "default_branch": {
+                        "type": "string"
+                      },
+                      "permissions": {
+                        "type": "object",
+                        "properties": {
+                          "admin": {
+                            "type": "boolean"
+                          },
+                          "maintain": {
+                            "type": "boolean"
+                          },
+                          "push": {
+                            "type": "boolean"
+                          },
+                          "triage": {
+                            "type": "boolean"
+                          },
+                          "pull": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch repositories"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/branches": {
+      "get": {
+        "summary": "Fetch branches of a repository from GitHub",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched branches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "commit": {
+                        "type": "object",
+                        "properties": {
+                          "sha": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          }
+                        }
+                      },
+                      "protected": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch branches"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/commits": {
+      "get": {
+        "summary": "Fetch commits of a repository from GitHub",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched commits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "sha": {
+                        "type": "string"
+                      },
+                      "commit": {
+                        "type": "object",
+                        "properties": {
+                          "author": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          },
+                          "committer": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "comment_count": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "html_url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "comments_url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "author": {
+                        "type": "object",
+                        "properties": {
+                          "login": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "number"
+                          },
+                          "node_id": {
+                            "type": "string"
+                          },
+                          "avatar_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "gravatar_id": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "html_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "followers_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "following_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "gists_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "starred_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "subscriptions_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "organizations_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "repos_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "events_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "received_events_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "site_admin": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "committer": {
+                        "type": "object",
+                        "properties": {
+                          "login": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "number"
+                          },
+                          "node_id": {
+                            "type": "string"
+                          },
+                          "avatar_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "gravatar_id": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "html_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "followers_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "following_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "gists_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "starred_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "subscriptions_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "organizations_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "repos_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "events_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "received_events_url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "site_admin": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "parents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "sha": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string",
+                              "format": "uri"
+                            },
+                            "html_url": {
+                              "type": "string",
+                              "format": "uri"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch commits"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/commits/{sha}": {
+      "get": {
+        "summary": "Fetch specific commit from GitHub",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sha",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched commit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sha": {
+                      "type": "string"
+                    },
+                    "node_id": {
+                      "type": "string"
+                    },
+                    "commit": {
+                      "type": "object",
+                      "properties": {
+                        "author": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "date": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        },
+                        "committer": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            },
+                            "date": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "tree": {
+                          "type": "object",
+                          "properties": {
+                            "sha": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string",
+                              "format": "uri"
+                            }
+                          }
+                        },
+                        "url": {
+                          "type": "string",
+                          "format": "uri"
+                        },
+                        "comment_count": {
+                          "type": "number"
+                        },
+                        "verification": {
+                          "type": "object",
+                          "properties": {
+                            "verified": {
+                              "type": "boolean"
+                            },
+                            "reason": {
+                              "type": "string"
+                            },
+                            "signature": {
+                              "type": "string"
+                            },
+                            "payload": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "html_url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "comments_url": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties" : "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch commit"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/commits/{sha}/files": {
+      "get": {
+        "summary": "Fetch commit files from GitHub",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sha",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched commit files",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "filename": {
+                        "type": "string"
+                      },
+                      "changes": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch commit files"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/pulls": {
+      "get": {
+        "summary": "Fetch pull requests for a specific repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched pull requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch pull requests"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/releases": {
+      "get": {
+        "summary": "Fetch releases for a specific repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched releases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch releases"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/contributors": {
+      "get": {
+        "summary": "Fetch contributors for a specific repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched contributors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch contributors"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/tags": {
+      "get": {
+        "summary": "Fetch tags for a specific repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched tags",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch tags"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/contents/{path}": {
+      "get": {
+        "summary": "Fetch contents of a specific path in a repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched contents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch contents"
+          }
+        }
+      }
+    },
+    "/api/repos/{owner}/{repo}/vulnerabilities": {
+      "get": {
+        "summary": "Fetch vulnerabilities for a specific repository",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched vulnerabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch vulnerabilities"
+          }
+        }
+      }
+    },
+    "/api/users/me": {
+      "get": {
+        "summary": "Fetch GitHub user profile",
+        "responses": {
+          "200": {
+            "description": "Successfully fetched user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "login": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "number"
+                    },
+                    "node_id": {
+                      "type": "string"
+                    },
+                    "avatar_url": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "html_url": {
+                      "type": "string"
+                    },
+                    "followers_url": {
+                      "type": "string"
+                    },
+                    "following_url": {
+                      "type": "string"
+                    },
+                    "gists_url": {
+                      "type": "string"
+                    },
+                    "starred_url": {
+                      "type": "string"
+                    },
+                    "subscriptions_url": {
+                      "type": "string"
+                    },
+                    "organizations_url": {
+                      "type": "string"
+                    },
+                    "repos_url": {
+                      "type": "string"
+                    },
+                    "events_url": {
+                      "type": "string"
+                    },
+                    "received_events_url": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "site_admin": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "blog": {
+                      "type": "string"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "hireable": {
+                      "type": "boolean"
+                    },
+                    "bio": {
+                      "type": "string"
+                    },
+                    "twitter_username": {
+                      "type": "string"
+                    },
+                    "public_repos": {
+                      "type": "number"
+                    },
+                    "public_gists": {
+                      "type": "number"
+                    },
+                    "followers": {
+                      "type": "number"
+                    },
+                    "following": {
+                      "type": "number"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "private_gists": {
+                      "type": "number"
+                    },
+                    "total_private_repos": {
+                      "type": "number"
+                    },
+                    "owned_private_repos": {
+                      "type": "number"
+                    },
+                    "disk_usage": {
+                      "type": "number"
+                    },
+                    "collaborators": {
+                      "type": "number"
+                    },
+                    "two_factor_authentication": {
+                      "type": "boolean"
+                    },
+                    "plan": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "space": {
+                          "type": "number"
+                        },
+                        "collaborators": {
+                          "type": "number"
+                        },
+                        "private_repos": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failed to fetch user profile"
+          }
+        }
+      }
+    }
+  }
+}
