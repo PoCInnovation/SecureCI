@@ -6,20 +6,17 @@ import {
     DropdownMenuItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "./dropdown-menu/dropdown-menu"
+} from "../dropdown-menu/dropdown-menu"
 import { signOut, useSession } from "next-auth/react"
-
-
-interface Organization {
-    name: string
-}
+import { useRouter } from 'next/navigation';
 
 interface SideBarChildrenProps {
-    organizations: Organization[]
-    currentOrg: Organization
+    organizations: string[],
+    currentOrg: string,
+    onChangeOrg: (name: string) => void
 }
 
-const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
+const SideBar = ({ organizations, currentOrg, onChangeOrg }: SideBarChildrenProps) => {
     const { data: session } = useSession();
 
     return (
@@ -38,12 +35,12 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
                             </defs>
                         </svg>
                         <DropdownMenu>
-                            <DropdownMenuTrigger className="ml-3 text-base font-semibold">{currentOrg.name}</DropdownMenuTrigger>
+                            <DropdownMenuTrigger className="ml-3 text-base font-semibold">{currentOrg}</DropdownMenuTrigger>
                             <DropdownMenuContent>
                                 {organizations?.map(org => {
                                     return (
-                                        <DropdownMenuItem key={org.name}>
-                                            <span className="w-56">{org.name}</span>
+                                        <DropdownMenuItem key={org} onSelect={() => { onChangeOrg(org) }}>
+                                            <span className="w-56">{org}</span>
                                             </DropdownMenuItem>
                                     )
                                 })}

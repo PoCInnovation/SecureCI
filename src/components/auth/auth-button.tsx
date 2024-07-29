@@ -4,6 +4,7 @@ import { Button } from "../ui/buttons/button";
 
 const AuthButton = () => {
     const { data: session } = useSession();
+    const defaultOrg = "personal"
 
     if (session) {
         return (
@@ -16,7 +17,7 @@ const AuthButton = () => {
     return (
         <>
             <p>Log in with Github</p><br/>
-            <Button onClick={() => { signIn('github', { callbackUrl: "/dashboard"}); }}>
+            <Button onClick={() => { signIn('github', { callbackUrl: `/orgs/${defaultOrg}`}); }}>
                 Sign In
             </Button>
         </>
