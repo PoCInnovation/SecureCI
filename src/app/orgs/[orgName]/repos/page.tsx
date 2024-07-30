@@ -1,12 +1,8 @@
-
 import PageTitle from "@/components/ui/page-title";
 import {
   Table, TableCaption, TableRow, TableHead,
   TableHeader, TableBody, TableCell, TableFooter
 } from "@/components/ui/table";
-import { TypographyH1 } from "@/components/ui/typography/h1";
-import { TypographyH2 } from "@/components/ui/typography/h2";
-import { TypographyH3 } from "@/components/ui/typography/h3";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

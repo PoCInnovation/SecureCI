@@ -1,5 +1,5 @@
 "use client"
-import { AreaChart, BarChartBigIcon, BarChartIcon, Building, Building2Icon, BuildingIcon, FolderIcon, Icon, LogOut, Plus, User } from "lucide-react"
+import { AreaChart, BarChartBigIcon, BarChartIcon, Building, Building2Icon, BuildingIcon, FolderIcon, Icon, LogOut, Plus, Settings, SettingsIcon, User } from "lucide-react"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -62,6 +62,12 @@ const SideBar = ({ organizations, currentOrg, onChangeOrg }: SideBarChildrenProp
                         <a onClick={() => router.push(`/orgs/${currentOrg}/repos`)} className="flex items-center rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 dark:text-white dark:hover:bg-slate-700">
                             <FolderIcon />
                             <span className="ml-3 flex-1 whitespace-nowrap">Repositories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a onClick={() => router.push(`/orgs/${currentOrg}/settings`)} className="flex items-center rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 dark:text-white dark:hover:bg-slate-700">
+                            <SettingsIcon />
+                            <span className="ml-3 flex-1 whitespace-nowrap">Settings</span>
                         </a>
                     </li>
                 </ul>
