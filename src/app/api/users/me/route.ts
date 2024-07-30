@@ -1,15 +1,17 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../api/auth/[...nextauth]/route";
 import fetchURL from "../../utils/utils";
 
 export async function GET(
-    req: NextApiRequest, res: NextApiResponse
+    req: NextRequest,
   ) {
     try {
-        const session: any = await getSession({ req });
+        const session: any = await getServerSession({ req, ...authOptions });
         if (!session) {
-            return res.status(401).json(
-                { message: "Unauthorized" }
+            return NextResponse.json(
+                { message: "Unauthorized" },
+                { status: 401 }
             );
         }
 
@@ -19,10 +21,14 @@ export async function GET(
 
         const user: object = await response.json();
 
-        return res.status(200).json(user);
+        return NextResponse.json(
+            user,
+            { status: 200 }
+        );
     } catch (error) {
-        return res.status(500).json(
-            { message: "Failed to fetch user" }
+        return NextResponse.json(
+            { message: "Failed to fetch user" },
+            { status: 500 }
         );
     }
 };

@@ -1,5 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../../../api/auth/[...nextauth]/route";
 import { z } from "zod";
 import fetchURL from "../../../../utils/utils";
 
@@ -9,24 +10,22 @@ const querySchema = z.object({
 });
 
 export async function GET(
-  req: NextApiRequest, res: NextApiResponse
+  req: NextRequest, { params }: any
 ) {
   try {
-    const session = await getSession({ req });
+    const session = await getServerSession({ req, ...authOptions });
     if (!session) {
-      return res.status(401).json(
-        { message: "Unauthorized" }
-      );
+      console.error('No valid access token found in session');
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const result = querySchema.safeParse(req.query);
+    const result = querySchema.safeParse(params);
 
     if (!result.success) {
-      return res.status(400).json({
-        message: "Invalid query",
-        errors: result.error.errors,
-      });
-
+      return NextResponse.json(
+          { message: "Invalid query parameters" },
+          { status: 400 }
+      );
     }
 
     const { owner, repo } = result.data
@@ -39,10 +38,14 @@ export async function GET(
     const response = await fetchURL(req, apiUrl);
 
     const issues : object = await response.json();
-    return res.status(200).json(issues);
+    return NextResponse.json(
+      issues, 
+      { status: 200 }
+    );
   } catch (error) {
-    return res.status(500).json(
-        { message: "Failed to fetch issues" }
+    return NextResponse.json(
+      { message: 'Failed to fetch issues' },
+      { status: 500 }
     );
   }
 };

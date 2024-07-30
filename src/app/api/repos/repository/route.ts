@@ -1,30 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
-import fetchURL from '../../utils/utils'
-
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../../../api/auth/[...nextauth]/route';
+import fetchURL from '../../utils/utils';
 
 export async function GET(
-  req: NextApiRequest, res: NextApiResponse
+  req: NextRequest
 ) {
   try {
-    const session = await getSession({ req });
-    console.log('Session:', session);
-
-    if (!session) {
-      console.error('No valid access token found in session');
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
 
     const apiUrl = 'https://api.github.com/user/repos';
 
-    console.log('Fetching repositories with access token:', session.accessToken);
-
-    const response = await fetchURL(req, apiUrl)
-
+    const response = await fetchURL(req, apiUrl);
     const repositories = await response.json();
-    return res.status(200).json(repositories);
+
+    return NextResponse.json(repositories, { status: 200 });
   } catch (error) {
     console.error('Error fetching repositories:', error);
-    return res.status(500).json({ message: 'Failed to fetch repositories' });
+    return NextResponse.json({ message: 'Failed to fetch repositories' }, { status: 500 });
   }
-};
+}

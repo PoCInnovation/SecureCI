@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
-export async function middleware(req: NextRequest, handler: (req: NextRequest) => Promise<NextResponse>)
-{
-  const session = await getSession({ req });
+export async function middleware(req: NextRequest) {
+  console.log('middleware');
+  const session = await getServerSession({ req, ...authOptions });
 
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
-  return handler(req);
+  return NextResponse.next();
 }
 
 export const config = {
