@@ -1,12 +1,7 @@
 "use client"
 import { useState } from "react"
-import { SideBar } from "../../components/ui/side-bar/side-bar"
+import { SideBar } from "../../components/ui/dashboard/side-bar"
 import { useRouter } from "next/navigation"
-
-// export const metadata = {
-//     title: 'Dashboard',
-//     description: 'SecureCI',
-// }
 
 export default function RootLayout({
     children,
@@ -26,9 +21,15 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                {children}
-                <SideBar organizations={organizations} currentOrg={currentOrg}
-                onChangeOrg={handleOrgChange}></SideBar>
+                <div className="flex flex-row h-screen">
+                    <div className="w-[12%]">
+                        <SideBar organizations={organizations} currentOrg={currentOrg}
+                        onChangeOrg={handleOrgChange} />
+                    </div>
+                    <div className="w-[88%]">
+                        {children}
+                    </div>
+                </div>
             </body>
         </html>
     )

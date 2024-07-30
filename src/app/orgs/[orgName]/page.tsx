@@ -1,8 +1,10 @@
 
+import PageTitle from "@/components/ui/page-title";
+import { TypographyH3 } from "@/components/ui/typography/h3";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-const OrganizationDetails = async ({ params }: {
+const Dashboard = async ({ params }: {
     params: { orgName: string }}) => {
   const session = await getServerSession();
 
@@ -12,10 +14,11 @@ const OrganizationDetails = async ({ params }: {
 
   return (
     <div>
-      <h1 style={{textAlign: "right"}}>{params.orgName}</h1>
-      <h1 style={{textAlign: "right"}}>List orgs</h1>
+      <PageTitle>
+        Dashboard
+      </PageTitle>
     </div>
   );
 }
 
-export default OrganizationDetails;
+export default Dashboard;
