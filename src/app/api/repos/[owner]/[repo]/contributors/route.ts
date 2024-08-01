@@ -34,7 +34,7 @@ export async function GET(
 
     const apiUrl: string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/contributors`;
 
-    const response = await fetchURL(req, apiUrl);
+    const response = await fetchURL(req, apiUrl, "GET");
 
     const contributors: object = await response.json();
     return NextResponse.json(

@@ -35,7 +35,7 @@ export async function GET(
 
     const apiUrl : string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/issues`;
 
-    const response = await fetchURL(req, apiUrl);
+    const response = await fetchURL(req, apiUrl, "GET");
 
     const issues : object = await response.json();
     return NextResponse.json(

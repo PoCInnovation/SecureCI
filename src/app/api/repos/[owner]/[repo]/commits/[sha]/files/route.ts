@@ -36,7 +36,7 @@ export async function GET(
 
     const apiUrl: string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/commits/${encodedSha}`;
 
-    const response = await fetchURL(req, apiUrl);
+    const response = await fetchURL(req, apiUrl, "GET");
 
     const commit = await response.json();
     return NextResponse.json(

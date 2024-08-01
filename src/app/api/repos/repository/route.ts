@@ -8,9 +8,16 @@ export async function GET(
 ) {
   try {
 
+    const session = await getServerSession({ req, ...authOptions });
+    
+    if (!session) {
+      console.error('No valid access token found in session');
+      return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    }
+
     const apiUrl = 'https://api.github.com/user/repos';
 
-    const response = await fetchURL(req, apiUrl);
+    const response = await fetchURL(req, apiUrl, "GET");
     const repositories = await response.json();
 
     return NextResponse.json(repositories, { status: 200 });
