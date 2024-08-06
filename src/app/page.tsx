@@ -1,9 +1,17 @@
-import type { NextPage } from 'next'
-import Typography from '@mui/material/Typography';
+import AuthButton from "@/components/auth/auth-button";
+import { Button } from "../components/ui/buttons/button";
+import { TypographyH1 } from "../components/ui/typography/h1";
+import { getServerSession } from "next-auth";
 
-const Home: NextPage = () => {
+const Home = async () => {
+  const session = await getServerSession();
+
+
   return (
-    <Typography variant="h2">Secure CI</Typography>
+    <>
+      <TypographyH1>SecureCI</TypographyH1>
+      <AuthButton/>
+    </>
   );
 }
 
