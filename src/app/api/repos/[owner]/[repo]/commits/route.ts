@@ -9,6 +9,71 @@ const querySchema = z.object({
   repo: z.string(),
 });
 
+/**
+ * @swagger
+ * /api/repos/{owner}/{repo}/commits:
+ *   get:
+ *     summary: Get commits from a repository
+ *     description: Retrieve a list of commits from a specific repository owned by the authenticated user.
+ *     tags:
+ *       - Repositories
+ *     parameters:
+ *       - name: owner
+ *         in: path
+ *         required: true
+ *         description: The owner of the repository
+ *         schema:
+ *           type: string
+ *       - name: repo
+ *         in: path
+ *         required: true
+ *         description: The name of the repository
+ *         schema:
+ *           type: string
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns a list of commits in the specified repository
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   sha:
+ *                     type: string
+ *                     description: The SHA hash of the commit
+ *                   commit:
+ *                     type: object
+ *                     properties:
+ *                       author:
+ *                         type: object
+ *                         properties:
+ *                           name:
+ *                             type: string
+ *                             description: The name of the author
+ *                           email:
+ *                             type: string
+ *                             description: The email of the author
+ *                           date:
+ *                             type: string
+ *                             format: date-time
+ *                             description: The date of the commit
+ *                       message:
+ *                         type: string
+ *                         description: The commit message
+ *                   url:
+ *                     type: string
+ *                     description: The URL of the commit
+ *       400:
+ *         description: Invalid query parameters
+ *       401:
+ *         description: Unauthorized - Requires authentication
+ *       500:
+ *         description: Failed to fetch commits
+ */
 export async function GET(
   req: NextRequest, {params}: any
 ) {

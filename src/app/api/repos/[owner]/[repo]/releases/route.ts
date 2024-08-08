@@ -9,6 +9,65 @@ const querySchema = z.object({
   repo: z.string(),
 });
 
+/**
+ * @swagger
+ * /api/repos/{owner}/{repo}/releases:
+ *   get:
+ *     summary: Get releases of a repository
+ *     description: Retrieve the releases of a specific repository belonging to the authenticated user.
+ *     tags:
+ *       - Repositories
+ *     parameters:
+ *       - name: owner
+ *         in: path
+ *         required: true
+ *         description: The owner of the repository
+ *         schema:
+ *           type: string
+ *       - name: repo
+ *         in: path
+ *         required: true
+ *         description: The name of the repository
+ *         schema:
+ *           type: string
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns a list of releases of the specified repository
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     description: The release ID.
+ *                   tag_name:
+ *                     type: string
+ *                     description: The name of the tag associated with the release.
+ *                   name:
+ *                     type: string
+ *                     description: The name of the release.
+ *                   draft:
+ *                     type: boolean
+ *                     description: Whether the release is a draft.
+ *                   prerelease:
+ *                     type: boolean
+ *                     description: Whether the release is a prerelease.
+ *                   html_url:
+ *                     type: string
+ *                     description: The URL of the release on GitHub.
+ *       400:
+ *         description: Invalid query parameters
+ *       401:
+ *         description: Unauthorized - Requires authentication
+ *       500:
+ *         description: Failed to fetch releases
+ */
+
 export async function GET(
   req: NextRequest, { params }: any
 ) {

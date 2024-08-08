@@ -9,6 +9,58 @@ const querySchema = z.object({
   repo: z.string(),
 });
 
+/**
+ * @swagger
+ * /api/repos/{owner}/{repo}/branches:
+ *   get:
+ *     summary: Get branches from a repository
+ *     description: Retrieve a list of branches from a specified repository owned by the authenticated user.
+ *     tags:
+ *       - Repositories
+ *     parameters:
+ *       - name: owner
+ *         in: path
+ *         required: true
+ *         description: The owner of the repository
+ *         schema:
+ *           type: string
+ *       - name: repo
+ *         in: path
+ *         required: true
+ *         description: The name of the repository
+ *         schema:
+ *           type: string
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns a list of branches from the repository
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: The name of the branch
+ *                   commit:
+ *                     type: object
+ *                     properties:
+ *                       sha:
+ *                         type: string
+ *                         description: The SHA of the latest commit on the branch
+ *                       url:
+ *                         type: string
+ *                         description: The URL of the commit
+ *       400:
+ *         description: Invalid query parameters
+ *       401:
+ *         description: Unauthorized - Requires authentication
+ *       500:
+ *         description: Failed to fetch branches
+ */
 export async function GET(
   req: NextRequest, {params}: any
 ) {
