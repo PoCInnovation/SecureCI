@@ -133,7 +133,7 @@ export const resourcesLinks = [
   { href: "#", text: "Getting Started" },
   { href: "#", text: "Documentation" },
   { href: "#", text: "Tutorials" },
-  { href: "#", text: "API Reference" },
+  { href: "/api-doc", text: "API Documentation" },
   { href: "#", text: "Community Forums" },
 ];
 
