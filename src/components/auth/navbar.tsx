@@ -6,6 +6,7 @@ import logo from "../../../assets/secure-CI.png";
 import { navItems } from "../../constants";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
+import { boolean } from "zod";
 
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
