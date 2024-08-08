@@ -6,7 +6,7 @@ import Image from "next/image";
 const Workflow = () => {
   return (
     <div className="mt-20">
-      <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center mt-6 tracking-wide pb-5">
+      <h2 className="mb-7 text-3xl sm:text-5xl lg:text-6xl text-center mt-6 tracking-wide pb-5">
         Streamline your{" "}
         <span className="bg-gradient-to-r from-cyan-500 to-cyan-800 text-transparent bg-clip-text">
           development process.
