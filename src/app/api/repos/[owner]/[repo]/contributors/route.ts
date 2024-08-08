@@ -9,6 +9,56 @@ const querySchema = z.object({
   repo: z.string(),
 });
 
+/**
+ * @swagger
+ * /api/repos/{owner}/{repo}/contributors:
+ *   get:
+ *     summary: Get contributors of a repository
+ *     description: Retrieve the list of contributors for a specific repository belonging to the authenticated user.
+ *     tags:
+ *       - Repositories
+ *     parameters:
+ *       - name: owner
+ *         in: path
+ *         required: true
+ *         description: The owner of the repository
+ *         schema:
+ *           type: string
+ *       - name: repo
+ *         in: path
+ *         required: true
+ *         description: The name of the repository
+ *         schema:
+ *           type: string
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns a list of contributors of the specified repository
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   login:
+ *                     type: string
+ *                     description: The username of the contributor.
+ *                   id:
+ *                     type: integer
+ *                     description: The ID of the contributor.
+ *                   contributions:
+ *                     type: integer
+ *                     description: The number of contributions made by the contributor.
+ *       400:
+ *         description: Invalid query parameters
+ *       401:
+ *         description: Unauthorized - Requires authentication
+ *       500:
+ *         description: Failed to fetch contributors
+ */
+
 export async function GET(
   req: NextRequest, { params }: any
 ) {
