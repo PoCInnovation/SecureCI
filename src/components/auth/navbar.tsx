@@ -54,16 +54,9 @@ const Navbar = () => {
         </div>
         {mobileDrawerOpen && (
           <div className={`fixed right-0 z-20 ${darkMode ? 'bg-neutral-800' : 'bg-neutral-200'} w-full p-12 flex flex-col justify-center items-center lg:hidden`}>
-            <ul>
-              {navItems.map((item, index) => (
-                <li key={index} className="py-4">
-                  <a href={item.href}>{item.label}</a>
-                </li>
-              ))}
-            </ul>
             <div className="flex space-x-6">
               <a onClick={() => signIn()} className="py-2 px-3 border rounded-md cursor-pointer">
-                Sign In
+                Get started
               </a>
               <button onClick={toggleDarkMode} className="py-2 px-3 border rounded-md">
                 {darkMode ? <Sun /> : <Moon />}
