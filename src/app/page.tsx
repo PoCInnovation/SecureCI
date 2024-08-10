@@ -1,17 +1,21 @@
+import { redirect } from 'next/navigation';
 import LoginPage from "@/components/auth/login-page";
-import { Button } from "../components/ui/buttons/button";
-import { TypographyH1 } from "../components/ui/typography/h1";
 import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const Home = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
+  if (session) {
+    redirect('/dashboard');
+  }
 
   return (
     <>
-      <LoginPage/>
+      <LoginPage />
     </>
   );
 }
+
 
 export default Home;
