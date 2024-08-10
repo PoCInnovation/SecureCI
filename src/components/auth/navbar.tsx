@@ -16,6 +16,8 @@ const Navbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
   };
 
+  const isDarkMode = document.documentElement.classList.contains("dark");
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -59,7 +61,7 @@ const Navbar = () => {
                 Get started
               </a>
               <button onClick={toggleDarkMode} className="py-2 px-3 border rounded-md">
-                {darkMode ? <Sun /> : <Moon />}
+                {isDarkMode ? <Sun /> : <Moon />}
               </button>
             </div>
           </div>
