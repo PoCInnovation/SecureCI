@@ -20,7 +20,6 @@ export const authOptions = {
         async session({ session, token, user }) {
             session.accessToken = token.accessToken
             session.user.id = token.id
-            console.log('test', session, token, user);
             
             return session
         }
