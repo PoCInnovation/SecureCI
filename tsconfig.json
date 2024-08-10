@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/docs/page.jsx", "components/Workflow.jsx", "components/ThemeContext.jsx", "src/app/api/auth/[...nextauth]/route.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/docs/page.jsx", "components/Workflow.jsx", "components/ThemeContext.jsx", "src/app/api/auth/[...nextauth]/route.js", "src/constants/index.jsx", "src/components/charts/github-contributions.jsx", "src/components/charts/github-contributions.js"],
   "exclude": ["node_modules"]
 }
