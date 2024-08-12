@@ -6,14 +6,13 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 import * as am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import * as am5themes_Dark from "@amcharts/amcharts5/themes/Dark";
 
-const ChartComponent = () => {
+const ChartComponent = (props) => {
   useEffect(() => {
 
     let root = am5.Root.new("chartdiv");
 
     const isDarkMode = document.documentElement.classList.contains("dark");
-
-    const gridColor = isDarkMode ? am5.color(0xfffffff) : am5.color(0x000000);
+    const gridColor = isDarkMode ? am5.color(0xffffff) : am5.color(0x000000);
 
     root.setThemes([am5themes_Animated.default.new(root)]);
 
@@ -37,34 +36,6 @@ const ChartComponent = () => {
     let cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
     cursor.lineX.set("forceHidden", true);
     cursor.lineY.set("forceHidden", true);
-
-    let date = new Date();
-    date.setHours(0, 0, 0, 0);
-
-    let value = 20;
-    function generateData() {
-      value = am5.math.round(Math.random() * 10 - 4.8 + value, 1);
-      if (value < 0) {
-        value = Math.random() * 10;
-      }
-
-      if (value > 100) {
-        value = 100 - Math.random() * 10;
-      }
-      am5.time.add(date, "day", 1);
-      return {
-        date: date.getTime(),
-        value: value
-      };
-    }
-
-    function generateDatas(count) {
-      let data = [];
-      for (var i = 0; i < count; ++i) {
-        data.push(generateData());
-      }
-      return data;
-    }
 
     let xAxis = chart.xAxes.push(
       am5xy.DateAxis.new(root, {
@@ -99,7 +70,6 @@ const ChartComponent = () => {
       })
     );
 
-    const lineColor = isDarkMode ? am5.color(0xffffff) : am5.color(0x000000);
     const fillColor = isDarkMode ? am5.color(0x555555) : am5.color(0xaaaaaa);
     const backgroundColor = isDarkMode ? am5.color(0x333333) : am5.color(0xffffff);
     const strokeColor = isDarkMode ? am5.color(0xaaaaaa) : am5.color(0x000000);
@@ -156,7 +126,16 @@ const ChartComponent = () => {
 
     container.set("background", background);
 
-    let data = generateDatas(300);
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+    const data = props.data
+      .map(item => ({
+        date: new Date(item.date).getTime(),
+        value: item.count
+      }))
+      .filter(item => item.date >= oneYearAgo.getTime());
+
     series.data.setAll(data);
 
     series.appear(1000);
@@ -165,7 +144,7 @@ const ChartComponent = () => {
     return () => {
       root.dispose();
     };
-  }, []);
+  }, [props.data]);
 
   return <div id="chartdiv" style={{ width: "100%", height: "300px" }}></div>;
 };
