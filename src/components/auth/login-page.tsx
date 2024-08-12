@@ -1,12 +1,13 @@
+"use client";
 import Navbar from "./navbar";
 import HeroSection from "./hero-section";
 import FeatureSection from "./feature-section";
 import Workflow from "./workflow";
 import Footer from "./footer";
-import Pricing from "./pricing";
 import Testimonials from "./testimonials";
 
 const LoginPage = () => {
+
   return (
     <>
       <Navbar />
