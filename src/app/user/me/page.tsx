@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { UserRoundCheck, UserRoundPlus, TrendingUp, EarthLock, BookKey, BookLock, Boxes, CircleDollarSign } from 'lucide-react';
+import { UserRoundCheck, UserRoundPlus, MapPin, SquarePen, TrendingUp, EarthLock, BookKey, BookLock, Boxes, CircleDollarSign } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import GithubContributions from '@/components/charts/github-contributions';
 import GithubContributionsPie from '@/components/charts/github-contributions-piechart';
@@ -12,13 +12,21 @@ interface UserProps {
   };
 }
 
-export default function UserPage(
-  { params }: UserProps
-) {
+export default function UserPage({ params }: UserProps) {
   const { username } = params;
   const [userData, setUserData] = useState(null);
   const [userContributions, setUserContributions] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [contributionsLoading, setContributionsLoading] = useState(true);
+
+  useEffect(() => {
+    const mode = localStorage.getItem("darkMode");
+    if (mode === "true") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
   useEffect(() => {
     fetch("/api/users/me")
@@ -34,14 +42,18 @@ export default function UserPage(
   }, [username]);
 
   useEffect(() => {
-    fetch(`https://github-contributions-api.jogruber.de/v4/${userData?.login}`)
-      .then(response => response.json())
-      .then(data => {
-        setUserContributions(data);
-      })
-      .catch(error => {
-        console.error('Error fetching user contributions:', error);
-      });
+    if (userData?.login) {
+      fetch(`https://github-contributions-api.jogruber.de/v4/${userData.login}`)
+        .then(response => response.json())
+        .then(data => {
+          setUserContributions(data);
+          setContributionsLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching user contributions:', error);
+          setContributionsLoading(false);
+        });
+    }
   }, [userData]);
 
   if (loading) return <div>Loading...</div>;
@@ -56,12 +68,26 @@ export default function UserPage(
           </div>
           <div className="pt-5 pl-5">
             <h1 className="text-xl">{userData.name}</h1>
-            <h2 className="text-slate-500">{userData.bio}</h2>
-            <h2 className="text-slate-500">{userData.location}</h2>
+            <h2 className="text-slate-500">
+              <div className='flex'>
+                <SquarePen />
+                <div className='pl-2'>
+                  {userData.bio}
+                </div>
+              </div>
+            </h2>
+            <h2 className="text-slate-500">
+              <div className='flex'>
+                <MapPin />
+                <div className='pl-2'>
+                  {userData.location}
+                </div>
+              </div>
+            </h2>
           </div>
         </div>
         <div className="mr-5 mt-5">
-          <button onClick={() => signOut({callbackUrl: '/'})} className="p-3 border rounded-sm dark:bg-collab-background">Log out</button>
+          <button onClick={() => signOut({ callbackUrl: '/' })} className="p-3 border rounded-sm dark:bg-collab-background">Log out</button>
         </div>
       </div>
       <div className="m-5 lg:m-10">
@@ -105,80 +131,88 @@ export default function UserPage(
         </div>
       </div>
       <div className="m-5 lg:m-10">
-        <div className="lg:flex justify-between" style={{width: "100%"}}>
+        <div className="lg:flex justify-between" style={{ width: "100%" }}>
           <div className="dark:bg-dark-background border rounded-xl">
             <div className='border-b flex justify-center'>
               <p className='text-xl p-5'>TOTAL CONTRIBUTION</p>
             </div>
             <div className=''>
+              {contributionsLoading ? (
+                <div>Loading contributions...</div>
+              ) : (
                 <GithubContributionsPie data={userContributions.total} />
+              )}
             </div>
+          </div>
+          <div className="dark:bg-dark-background border rounded-xl" style={{ width: "40vw" }}>
+            <div className='border-b flex justify-center'>
+              <p className='text-xl p-5'>PLAN</p>
             </div>
-            <div className="dark:bg-dark-background border rounded-xl" style={{width: "40vw"}}>
-                <div className='border-b flex justify-center'>
-                    <p className='text-xl p-5'>PLAN</p>
-                </div>
-                <div className="flex justify-between mt-3" style={{ height: "300px" }}>
-                <div className='border-r ml-4 pt-5 flex flex-col' style={{ width: "50%", height: "100%" }}>
-                  <div className="flex-1">
-                    <div className="flex justify-between">
-                      <div className="flex">
-                        <div className="bg-plan-background p-2 border outline-pink-500 rounded-md">
-                          <CircleDollarSign color="red" />
-                        </div>
-                        <div className="ml-4 mt-1.5">
-                          <p className='text-xl'>PLAN</p>
-                        </div>
+            <div className="flex justify-between mt-3" style={{ height: "300px" }}>
+              <div className='border-r ml-4 pt-5 flex flex-col' style={{ width: "50%", height: "100%" }}>
+                <div className="flex-1">
+                  <div className="flex justify-between">
+                    <div className="flex">
+                      <div className="bg-plan-background p-2 border outline-pink-500 rounded-md">
+                        <CircleDollarSign color="red" />
                       </div>
-                      <p className='text-xl mr-5'>{userData.plan.name}</p>
+                      <div className="ml-4 mt-1.5">
+                        <p className='text-xl'>PLAN</p>
+                      </div>
                     </div>
+                    <p className='text-xl mr-5'>{userData.plan.name}</p>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between">
-                        <div className="flex">
-                          <div className="bg-collab-background p-2 border outline-pink-500 rounded-md">
-                            <Boxes color="blue" />
-                          </div>
-                          <div className="ml-4 mt-1.5">
-                            <p className='text-xl'>COLLABORATORS</p>
-                          </div>
-                        </div>
-                        <p className='text-xl mr-5 mt-1'>{userData.plan.collaborators}</p>
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                    <div className="flex justify-between">
-                        <div className="flex">
-                          <div className="bg-private-background p-2 border outline-pink-500 rounded-md">
-                            <EarthLock color="purple" />
-                          </div>
-                          <div className="ml-4 mt-1.5">
-                            <p className='text-xl'>PRIVATE REPOS</p>
-                          </div>
-                        </div>
-                        <p className='text-xl mr-5 mt-1'>{userData.plan.private_repos}</p>
-                      </div>
-                    </div>
                 </div>
                 <div className="flex-1">
-                  <div className='flex justify-center mt-6'>
-                    <p>Storage Size</p>
+                  <div className="flex justify-between">
+                    <div className="flex">
+                      <div className="bg-collab-background p-2 border outline-pink-500 rounded-md">
+                        <Boxes color="blue" />
+                      </div>
+                      <div className="ml-4 mt-1.5">
+                        <p className='text-xl'>COLLABORATORS</p>
+                      </div>
+                    </div>
+                    <p className='text-xl mr-5 mt-1'>{userData.plan.collaborators}</p>
                   </div>
-                  <div className="mt-6">
-                    <GithubStorage data={userData.plan} />
+                </div>
+                <div className="flex-1">
+                  <div className="flex justify-between">
+                    <div className="flex">
+                      <div className="bg-private-background p-2 border outline-pink-500 rounded-md">
+                        <EarthLock color="purple" />
+                      </div>
+                      <div className="ml-4 mt-1.5">
+                        <p className='text-xl'>PRIVATE REPOS</p>
+                      </div>
+                    </div>
+                    <p className='text-xl mr-5 mt-1'>{userData.plan.private_repos}</p>
                   </div>
                 </div>
               </div>
+              <div className="flex-1">
+                <div className='flex justify-center mt-6'>
+                  <p>Storage Size</p>
+                </div>
+                <div className="mt-6">
+                  <GithubStorage data={userData.plan} />
+                </div>
+              </div>
             </div>
+          </div>
         </div>
         <div className='border-b flex'>
           <div className='border bg-collab-background rounded-xl mt-4 mr-2 mb-3 p-4'>
             <TrendingUp color="blue" />
           </div>
-            <p className='mb-5 mt-7 pl-2 text-2xl'>Github Contributions</p>
+          <p className='mb-5 mt-7 pl-2 text-2xl'>Github Contributions</p>
         </div>
         <div className='mt-5'>
-            <GithubContributions />
+          {contributionsLoading ? (
+            <div>Loading contributions...</div>
+          ) : (
+            <GithubContributions data={userContributions.contributions} />
+          )}
         </div>
       </div>
     </div>
