@@ -16,15 +16,24 @@ const Navbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
   };
 
-  const isDarkMode = document.documentElement.classList.contains("dark");
-
   useEffect(() => {
+    localStorage.setItem("darkMode", darkMode ? "true" : "false");
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    const mode = localStorage.getItem("darkMode");
+    if (mode === "true") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    setDarkMode(mode);
+  } , []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
