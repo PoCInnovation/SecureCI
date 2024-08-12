@@ -104,9 +104,9 @@ export async function GET(
 
     const response = await fetchURL(req, apiUrl, "GET");
 
-    const commits : object = await response.json();
+    const commits : Array<Object> = await response.json();
     return NextResponse.json(
-      commits,
+      commits[0],
       { status: 200 }
     );
   } catch (error) {

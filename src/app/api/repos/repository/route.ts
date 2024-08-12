@@ -60,7 +60,7 @@ export async function GET(
     const response = await fetchURL(req, apiUrl, "GET");
     const repositories = await response.json();
 
-    return NextResponse.json(repositories, { status: 200 });
+    return NextResponse.json(repositories[0], { status: 200 });
   } catch (error) {
     console.error('Error fetching repositories:', error);
     return NextResponse.json({ message: 'Failed to fetch repositories' }, { status: 500 });
