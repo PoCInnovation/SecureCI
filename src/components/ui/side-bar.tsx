@@ -102,7 +102,7 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
-                  <span onClick={() => router.push('user/me')}>
+                  <span onClick={() => router.replace('/user/me')}>
                     {session?.user?.name}
                   </span>
                 </DropdownMenuItem>
