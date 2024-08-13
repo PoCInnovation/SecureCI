@@ -24,6 +24,11 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        'dark-background': 'rgba(25, 25, 25, 0.83)',
+        'plan-background': 'rgba(255, 3, 41, 0.37)',
+        'collab-background': 'rgba(3, 137, 255, 0.37)',
+        'private-background': 'rgba(255, 3, 179, 0.28)',
+        'followers-background': 'rgba(3, 255, 58, 0.24)',
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

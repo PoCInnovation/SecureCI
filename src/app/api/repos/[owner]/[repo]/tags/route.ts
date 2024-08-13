@@ -9,6 +9,58 @@ const querySchema = z.object({
   repo: z.string(),
 });
 
+/**
+ * @swagger
+ * /api/repos/{owner}/{repo}/tags:
+ *   get:
+ *     summary: Get tags of a repository
+ *     description: Retrieve the tags of a specific repository belonging to the authenticated user.
+ *     tags:
+ *       - Repositories
+ *     parameters:
+ *       - name: owner
+ *         in: path
+ *         required: true
+ *         description: The owner of the repository
+ *         schema:
+ *           type: string
+ *       - name: repo
+ *         in: path
+ *         required: true
+ *         description: The name of the repository
+ *         schema:
+ *           type: string
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns a list of tags of the specified repository
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: The name of the tag.
+ *                   commit:
+ *                     type: object
+ *                     properties:
+ *                       sha:
+ *                         type: string
+ *                         description: The commit SHA associated with the tag.
+ *                       url:
+ *                         type: string
+ *                         description: The URL of the commit associated with the tag.
+ *       400:
+ *         description: Invalid query parameters
+ *       401:
+ *         description: Unauthorized - Requires authentication
+ *       500:
+ *         description: Failed to fetch tags
+ */
 export async function GET(
   req: NextRequest, { params }: any
 ) {

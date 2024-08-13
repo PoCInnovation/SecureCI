@@ -1,18 +1,21 @@
-import AuthButton from "@/components/auth/auth-button";
-import { Button } from "../components/ui/buttons/button";
-import { TypographyH1 } from "../components/ui/typography/h1";
+import { redirect } from 'next/navigation';
+import LoginPage from "@/components/auth/login-page";
 import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const Home = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
+  if (session) {
+    redirect('/dashboard');
+  }
 
   return (
     <>
-      <TypographyH1>SecureCI</TypographyH1>
-      <AuthButton/>
+      <LoginPage />
     </>
   );
 }
+
 
 export default Home;

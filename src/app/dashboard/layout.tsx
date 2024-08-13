@@ -10,16 +10,11 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const organizations = [{name: "Epitech"},
-        {name: "PoC"}, {name: "PoC Services"}
-      ]
-    const currentOrg = {name: "Personal"}
 
     return (
         <html lang="en">
             <body>
                 {children}
-                <SideBar organizations={organizations} currentOrg={currentOrg}></SideBar>
             </body>
         </html>
     )

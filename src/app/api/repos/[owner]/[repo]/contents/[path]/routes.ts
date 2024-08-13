@@ -10,6 +10,63 @@ const querySchema = z.object({
   path: z.string(),
 });
 
+/**
+ * @swagger
+ * /api/repos/{owner}/{repo}/contents/{path}:
+ *   get:
+ *     summary: Get content of a file in a repository
+ *     description: Retrieve the content of a specific file in a repository owned by the authenticated user.
+ *     tags:
+ *       - Repositories
+ *     parameters:
+ *       - name: owner
+ *         in: path
+ *         required: true
+ *         description: The owner of the repository
+ *         schema:
+ *           type: string
+ *       - name: repo
+ *         in: path
+ *         required: true
+ *         description: The name of the repository
+ *         schema:
+ *           type: string
+ *       - name: path
+ *         in: path
+ *         required: true
+ *         description: The path to the file within the repository
+ *         schema:
+ *           type: string
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Returns the content of the specified file
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 type:
+ *                   type: string
+ *                   description: The type of the content (file or directory)
+ *                 name:
+ *                   type: string
+ *                   description: The name of the file or directory
+ *                 path:
+ *                   type: string
+ *                   description: The path to the file or directory
+ *                 content:
+ *                   type: string
+ *                   description: The content of the file, encoded in Base64 (if the file is a text file)
+ *       400:
+ *         description: Invalid query parameters
+ *       401:
+ *         description: Unauthorized - Requires authentication
+ *       500:
+ *         description: Failed to fetch content
+ */
+
 export async function GET(
   req: NextRequest, {params}: any
 ) {
