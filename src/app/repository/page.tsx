@@ -2,12 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
-import { DropdownMenu, DropdownMenuItem, DropdownMenuContent } from "@/components/ui/dropdown-menu/dropdown-menu";
-import "./page.css"
+import "./page.css";
+import { redirect } from "next/navigation";
 
 interface Repository {
     id: string;
     name: string;
+    author?: {
+        avatar_url: string;
+        login: string;
+    };
+    version: string;
+    LastPush : string;
+
 }
 
 const RepositoryPage: React.FC = () => {
@@ -38,9 +45,7 @@ const RepositoryPage: React.FC = () => {
                 }
 
                 const data: Repository[] = await response.json();
-                //console.log(data);
                 setRepositories(data);
-                //console.log(repositories);
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'Unknown error');
             } finally {
@@ -60,31 +65,29 @@ const RepositoryPage: React.FC = () => {
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        console.log(error);
+        redirect("/")
     }
 
-    /*return (
-        <div>
-            <h1>Your Repositories</h1>
-            <DropdownMenu>
-                <DropdownMenuContent>
-                {repositories.map((repo) => (
-                    <DropdownMenuItem key={repo.id}>{repo.name}</DropdownMenuItem>
-                ))}
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
-    );*/
-
     return (
+        <>
         <div className="container">
             <h1 className="title">Your Repositories</h1>
             <ul className="repository-list">
                 {repositories.map((repo) => (
-                    <li key={repo.id} className="repository-item">{repo.name}</li>
+                    <li key={repo.id} className="repository-item">
+                        <div className="repo-details">
+                            <h2>{repo.name}</h2>
+                            <p className="version">LastPush: {repo.LastPush}</p>
+                        </div>
+                        <div className="repo-author">
+                                <span>LastPush: {repo.LastPush}</span>
+                        </div>
+                    </li>
                 ))}
             </ul>
         </div>
+        </>
     );
 };
 
