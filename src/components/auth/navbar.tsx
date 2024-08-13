@@ -3,14 +3,12 @@
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../../../assets/secure-CI.png";
-import { navItems } from "../../constants";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import { boolean } from "zod";
 
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const toggleNavbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
@@ -26,14 +24,17 @@ const Navbar = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    const mode = localStorage.getItem("darkMode");
-    if (mode === "true") {
+    const mode: string | null = localStorage.getItem("darkMode");
+    const isDarkMode = mode === "true";
+    
+    if (isDarkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-    setDarkMode(mode);
-  } , []);
+    
+    setDarkMode(isDarkMode);
+  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -70,7 +71,7 @@ const Navbar = () => {
                 Get started
               </a>
               <button onClick={toggleDarkMode} className="py-2 px-3 border rounded-md">
-                {isDarkMode ? <Sun /> : <Moon />}
+                {darkMode ? <Sun /> : <Moon />}
               </button>
             </div>
           </div>

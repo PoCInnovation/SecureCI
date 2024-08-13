@@ -12,10 +12,42 @@ interface UserProps {
   };
 }
 
+interface UserData {
+  login: string;
+  avatar_url: string;
+  name: string;
+  bio: string;
+  location: string;
+  followers: number;
+  following: number;
+  public_repos: number;
+  total_private_repos: number;
+  plan: {
+    name: string;
+    collaborators: number;
+    private_repos: number;
+    storage: {
+      used: number;
+      total: number;
+    };
+  };
+}
+
+interface UserContributions {
+  total: {
+    total: number;
+    year: number;
+  };
+  contributions: {
+    date: string;
+    count: number;
+  }[];
+}
+
 export default function UserPage({ params }: UserProps) {
   const { username } = params;
-  const [userData, setUserData] = useState(null);
-  const [userContributions, setUserContributions] = useState(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userContributions, setUserContributions] = useState<UserContributions | null>(null);
   const [loading, setLoading] = useState(true);
   const [contributionsLoading, setContributionsLoading] = useState(true);
 
@@ -137,11 +169,11 @@ export default function UserPage({ params }: UserProps) {
               <p className='text-xl p-5'>TOTAL CONTRIBUTION</p>
             </div>
             <div className=''>
-              {contributionsLoading ? (
+            {contributionsLoading || !userContributions ? (
                 <div>Loading contributions...</div>
-              ) : (
+            ) : (
                 <GithubContributionsPie data={userContributions.total} />
-              )}
+            )}
             </div>
           </div>
           <div className="dark:bg-dark-background border rounded-xl" style={{ width: "40vw" }}>
@@ -208,11 +240,11 @@ export default function UserPage({ params }: UserProps) {
           <p className='mb-5 mt-7 pl-2 text-2xl'>Github Contributions</p>
         </div>
         <div className='mt-5'>
-          {contributionsLoading ? (
+        {contributionsLoading || !userContributions ? (
             <div>Loading contributions...</div>
-          ) : (
+        ) : (
             <GithubContributions data={userContributions.contributions} />
-          )}
+        )}
         </div>
       </div>
     </div>

@@ -26,12 +26,7 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
 
   const router = useRouter();
 
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-
-  const toggleNavbar = () => {
-    setMobileDrawerOpen(!mobileDrawerOpen);
-  };
 
   useEffect(() => {
     const isDarkMode = document.documentElement.classList.contains("dark");
