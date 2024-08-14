@@ -8,19 +8,20 @@ import { redirect } from "next/navigation";
 interface Repository {
     id: string;
     name: string;
-    author?: {
+    owner?: {
         avatar_url: string;
         login: string;
     };
     version: string;
     LastPush : string;
-
+    language: string;
 }
 
 const RepositoryPage: React.FC = () => {
     const [repositories, setRepositories] = useState<Repository[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [theme, setTheme] = useState("light");
 
     useEffect(() => {
         const fetchRepositories = async () => {
@@ -60,6 +61,10 @@ const RepositoryPage: React.FC = () => {
         console.log(repositories);
     }, [repositories]);
 
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -71,22 +76,26 @@ const RepositoryPage: React.FC = () => {
 
     return (
         <>
-        <div className="container">
-            <h1 className="title">Your Repositories</h1>
-            <ul className="repository-list">
-                {repositories.map((repo) => (
-                    <li key={repo.id} className="repository-item">
-                        <div className="repo-details">
-                            <h2>{repo.name}</h2>
-                            <p className="version">LastPush: {repo.LastPush}</p>
-                        </div>
-                        <div className="repo-author">
-                                <span>LastPush: {repo.LastPush}</span>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+            <div className={`container ${theme}`}>
+                <h1 className="title">Your Repositories</h1>
+                <button onClick={toggleTheme} className="theme-toggle">
+                    Switch to {theme === "light" ? "Dark" : "Light"} Theme
+                </button>
+                <ul className="repository-list">
+                    {repositories.map((repo) => (
+                        <li key={repo.id} className="repository-item">
+                            <div className="repo-details">
+                                <h2>{repo.name}</h2>
+                                <span>Language: {repo.language}</span>
+                            </div>
+                            <div className="Owner">
+                                <p className="owner">Owner: {repo.owner?.login}</p>
+                            </div>
+                            <img src={repo.owner.avatar_url} alt={repo.owner.login} className="avatar"/>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
     );
 };
