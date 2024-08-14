@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import "./page.css";
 import { redirect } from "next/navigation";
+import { SideBar } from "../../components/ui/side-bar"; // Highlighted change
 
 interface Repository {
     id: string;
@@ -17,11 +18,17 @@ interface Repository {
     language: string;
 }
 
+interface Organization { // Highlighted change
+    name: string;
+}
+
 const RepositoryPage: React.FC = () => {
     const [repositories, setRepositories] = useState<Repository[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [theme, setTheme] = useState("light");
+    const [organizations, setOrganizations] = useState<Organization[]>([]); // Highlighted change
+    const [currentOrg, setCurrentOrg] = useState<Organization | null>(null); // Highlighted change
 
     useEffect(() => {
         const fetchRepositories = async () => {
@@ -46,7 +53,11 @@ const RepositoryPage: React.FC = () => {
                 }
 
                 const data: Repository[] = await response.json();
-                setRepositories(data);
+                if (Array.isArray(data)) {
+                    setRepositories(data);
+                } else {
+                    throw new Error('Fetched data is not an array');
+                }
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'Unknown error');
             } finally {
@@ -58,6 +69,7 @@ const RepositoryPage: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        console.log("Repositories updated");
         console.log(repositories);
     }, [repositories]);
 
@@ -82,7 +94,7 @@ const RepositoryPage: React.FC = () => {
                     Switch to {theme === "light" ? "Dark" : "Light"} Theme
                 </button>
                 <ul className="repository-list">
-                    {repositories.map((repo) => (
+                    {Array.isArray(repositories) && repositories.map((repo) => (
                         <li key={repo.id} className="repository-item">
                             <div className="repo-details">
                                 <h2>{repo.name}</h2>
@@ -91,11 +103,12 @@ const RepositoryPage: React.FC = () => {
                             <div className="Owner">
                                 <p className="owner">Owner: {repo.owner?.login}</p>
                             </div>
-                            <img src={repo.owner.avatar_url} alt={repo.owner.login} className="avatar"/>
+                            <img src={repo.owner?.avatar_url} alt={repo.owner?.login} className="avatar"/>
                         </li>
                     ))}
                 </ul>
             </div>
+            <SideBar organizations={organizations} currentOrg={currentOrg ?? { name: "Default Organization" }} />
         </>
     );
 };
