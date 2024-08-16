@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import "./page.css";
 import { redirect } from "next/navigation";
-import { SideBar } from "../../components/ui/side-bar"; // Highlighted change
+import { SideBar } from "@/components/ui/side-bar"; // Highlighted change
 
 interface Repository {
     id: string;
