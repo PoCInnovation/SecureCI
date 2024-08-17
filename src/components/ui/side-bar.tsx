@@ -176,8 +176,8 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
           <div className="flex-grow"></div>
           <div className="border-t border-slate-200 dark:border-slate-700 pt-5"></div>
           <div onClick={() => router.replace('/user/me')} className="ml-2 p-2 flex w-11/12 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">
-            <User className="mr-3 h-6 w-6 dark:text-slate-100 text-slate-900" />
-            <button>{session?.user?.name}</button>
+            <img src={session?.user?.image} alt="User avatar" width={30} height={30} className="rounded-full" />
+            <button className="ml-3">{session?.user?.name}</button>
           </div>
         </div>
       </aside>
