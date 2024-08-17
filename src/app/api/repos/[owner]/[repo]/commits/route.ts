@@ -7,6 +7,8 @@ import fetchURL from "../../../../utils/utils";
 const querySchema = z.object({
   owner: z.string(),
   repo: z.string(),
+  per_page: z.string().optional(),
+  page: z.string().optional(),
 });
 
 /**
@@ -30,6 +32,18 @@ const querySchema = z.object({
  *         description: The name of the repository
  *         schema:
  *           type: string
+ *       - name: per_page
+ *         in: query
+ *         required: false
+ *         description: The number of commits per page (max 100)
+ *         schema:
+ *           type: integer
+ *       - name: page
+ *         in: query
+ *         required: false
+ *         description: The page number of the results to fetch
+ *         schema:
+ *           type: integer
  *     produces:
  *       - application/json
  *     responses:
@@ -75,7 +89,7 @@ const querySchema = z.object({
  *         description: Failed to fetch commits
  */
 export async function GET(
-  req: NextRequest, {params}: any
+  req: NextRequest, { params }: any
 ) {
   try {
     const session = await getServerSession({ req, ...authOptions });
@@ -90,23 +104,46 @@ export async function GET(
 
     if (!result.success) {
       return NextResponse.json(
-          { message: "Invalid query parameters" },
-          { status: 400 }
-      )
+        { message: "Invalid query parameters" },
+        { status: 400 }
+      );
     }
 
     const { owner, repo } = result.data;
+    const per_page = result.data.per_page || "100";
+    let page = result.data.page || "1";
 
-    const encodedOwner : string = encodeURIComponent(owner);
-    const encodedRepo : string = encodeURIComponent(repo);
+    const encodedOwner: string = encodeURIComponent(owner);
+    const encodedRepo: string = encodeURIComponent(repo);
+    
+    let allCommits: Array<Object> = [];
+    let hasMorePages = true;
 
-    const apiUrl : string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/commits`;
+    while (hasMorePages) {
+      const apiUrl: string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/commits?per_page=${per_page}&page=${page}`;
+      
+      const response = await fetchURL(req, apiUrl, "GET");
 
-    const response = await fetchURL(req, apiUrl, "GET");
+      if (!response.ok) {
+        return NextResponse.json(
+          { message: `Failed to fetch commits: ${response.statusText}` },
+          { status: response.status }
+        );
+      }
 
-    const commits : Array<Object> = await response.json();
+      const commits: Array<Object> = await response.json();
+
+      allCommits = allCommits.concat(commits);
+
+      if (commits.length < parseInt(per_page)) {
+        hasMorePages = false;
+      } else {
+        page = (parseInt(page) + 1).toString();
+      }
+    }
+
     return NextResponse.json(
-      commits[0],
+      allCommits,
       { status: 200 }
     );
   } catch (error) {
