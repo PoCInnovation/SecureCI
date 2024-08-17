@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { CircleAlert, Logs, FolderKanban, Star, LineChart, ShieldAlert, Component, TriangleAlert, Eye, GitFork } from "lucide-react";
+import { CircleAlert, Logs, FolderKanban, ShieldCheck, ShieldX, FileWarning, Star, LineChart, ShieldAlert, Component, TriangleAlert, Eye, GitFork } from "lucide-react";
 import VulnerabilityCard from "../../../../../src/components/ui/card/vulnerability";
 import GithubCommits from "../../../../../src/components/charts/github-commits-repos";
 import GithubContributor from "../../../../../src/components/charts/github-contributors";
@@ -183,13 +183,13 @@ export default function RepoPage(
         });
     };
 
-
     return (
-        <div className="sm:pl-64 flex">
-            <div className="lg:w-2/3 pt-10 h-screen overflow-y-auto">
-                <h1 className="ml-10 pb-2 mr-5 text-xl border-b">
+        <div className="sm:pl-64 flex h-screen overflow-hidden">
+        <div className="lg:w-2/3 pt-10 h-full overflow-y-hidden">
+                <h1 className="ml-10 pb-5 mr-5 text-xl border-b">
                     <strong>Dashboard</strong>
                 </h1>
+                <div className="h-full overflow-y-auto">
                 <div className="flex justify-between ml-10 pt-10">
                     <div className="flex">
                         <FolderKanban className="mt-1"/>
@@ -198,7 +198,7 @@ export default function RepoPage(
                                 {repositories?.name}
                             </p>
                             <p className="ml-3 text-sm text-slate-400">
-                                {formatDate(repositories?.created_at)}
+                                {repositories?.created_at ? formatDate(repositories.created_at) : 'Loading ...'}
                             </p>
                         </div>
                     </div>
@@ -241,7 +241,7 @@ export default function RepoPage(
                     </div>
                 </div>
                 <div className="mt-5 ml-10">
-                    <div className="border p-3" style={{width: "95%"}}>
+                    <div className="border dark:border-slate-600 p-3" style={{width: "95%"}}>
                         { commits ? (
                             <GithubCommits commits={commits} />
                         ) : (
@@ -263,7 +263,7 @@ export default function RepoPage(
                             <Component className="mt-1 mr-3"/>
                             <p className="mt-1">Contributors</p>
                         </div>
-                        <div className="border p-3 h-full ml-10 dark:bg-semi-dark">
+                        <div className="border dark:border-slate-600 p-3 h-110 ml-10">
                             { contributors ? (
                                  <GithubContributor contributors={contributors} />
                             ) : (
@@ -283,17 +283,78 @@ export default function RepoPage(
                             <ShieldAlert className="mr-3"/>
                             <p>Vulnerability History</p>
                         </div>
-                        <div className="border p-3 mr-10 h-full dark:bg-semi-dark">
-                            <p>Yo</p>
+                        <div className="border dark:border-slate-600 pb-10 pr-10 pl-10 mr-10 h-110 overflow-y-auto">
+                            <div className="border-b border-slate-500 pb-10 pt-10 pr-5">
+                                <div className="flex justify-between">
+                                    <div className="flex">
+                                        <ShieldCheck color="green" />
+                                        <div className="ml-2">
+                                            <p>Potential Sql Injection</p>
+                                            <p className="text-sm text-slate-400">Yesterday</p>
+                                        </div>    
+                                    </div>
+                                    <div className="w-1/3 bg-gray-200 mt-2 rounded-full h-1.5 dark:bg-gray-700">
+                                        <div className="bg-red-700 h-1.5 rounded-full" style={{width: "80%"}}></div>
+                                        <p className="mt-1 text-sm text-red-700">High</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border-b border-slate-500 pb-10 pt-10 pr-5">
+                                <div className="flex justify-between">
+                                    <div className="flex">
+                                        <ShieldX color="red" />
+                                        <div className="ml-2">
+                                            <p>Token Leak</p>
+                                            <p className="text-sm text-slate-400">Jun 23, 2024, 11:30:00PM</p>
+                                        </div>    
+                                    </div>
+                                    <div className="w-1/3 bg-gray-200 mt-2 rounded-full h-1.5 dark:bg-gray-700">
+                                        <div className="bg-red-900 h-1.5 rounded-full" style={{width: "90%"}}></div>
+                                        <p className="mt-1 text-sm text-red-800">Very High</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border-b border-slate-500 pb-10 pt-10 pr-5">
+                                <div className="flex justify-between">
+                                    <div className="flex">
+                                        <ShieldCheck color="green" />
+                                        <div className="ml-2">
+                                            <p>Cross-Site Scripting</p>
+                                            <p className="text-sm text-slate-400">Jun 16, 2024, 11:30:00PM</p>
+                                        </div>    
+                                    </div>
+                                    <div className="w-1/3 bg-gray-200 mt-2 rounded-full h-1.5 dark:bg-gray-700">
+                                        <div className="bg-green-600 h-1.5 rounded-full" style={{width: "30%"}}></div>
+                                        <p className="mt-1 text-sm text-green-600">Low</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="border-b border-slate-500 pb-10 pt-10 pr-5">
+                                <div className="flex justify-between">
+                                    <div className="flex">
+                                        <ShieldCheck color="green" />
+                                        <div className="ml-2">
+                                            <p>Cross-Site Scripting</p>
+                                            <p className="text-sm text-slate-400">Jun 16, 2024, 11:30:00PM</p>
+                                        </div>    
+                                    </div>
+                                    <div className="w-1/3 bg-gray-200 mt-2 rounded-full h-1.5 dark:bg-gray-700">
+                                        <div className="bg-green-600 h-1.5 rounded-full" style={{width: "30%"}}></div>
+                                        <p className="mt-1 text-sm text-green-600">Low</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
-            <div className="bg-semi-light dark:bg-slate-900 lg:w-1/3 lg:h-screen overflow-y-auto">
+            <div className="bg-semi-light dark:bg-slate-900 lg:w-1/3 h-full overflow-y-hidden">
                 <div className="pt-10">
                     <h1 className="ml-10 pb-2 mr-5 text-xl border-b">
                         <strong>Overview</strong>
                     </h1>
+                    <div className="lg:h-screen overflow-y-auto">
                     <div className="flex mt-7">
                         <CircleAlert className="ml-10" size={25} color="red" />
                         <p className="ml-2 font-medium">Vulnerability</p>
@@ -305,7 +366,7 @@ export default function RepoPage(
                             <Logs className="ml-10" size={25} />
                             <p className="ml-2 font-medium">Logs -&gt; Last Commits</p>
                         </div>
-                        <div className="border bg-white dark:bg-black rounded border-slate-400 mt-5 mb-10 ml-10 mr-10 overflow-auto h-128">
+                        <div className="border rounded border-slate-400 mt-5 mb-10 ml-10 mr-10 overflow-auto h-128">
                         {lastCommits ? (
                             lastCommits.map((commit, index) => (
                                 <React.Fragment key={index}>
@@ -346,6 +407,7 @@ export default function RepoPage(
                             </div>
                         )}
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
