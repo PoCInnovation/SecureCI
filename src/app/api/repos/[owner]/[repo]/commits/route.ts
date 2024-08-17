@@ -110,14 +110,14 @@ export async function GET(
     }
 
     const { owner, repo } = result.data;
-    const per_page = result.data.per_page || "100";
-    let page = result.data.page || "1";
+    const per_page: string = result.data.per_page || "100";
+    let page: string = result.data.page || "1";
 
     const encodedOwner: string = encodeURIComponent(owner);
     const encodedRepo: string = encodeURIComponent(repo);
     
     let allCommits: Array<Object> = [];
-    let hasMorePages = true;
+    let hasMorePages: boolean = true;
 
     while (hasMorePages) {
       const apiUrl: string = `https://api.github.com/repos/${encodedOwner}/${encodedRepo}/commits?per_page=${per_page}&page=${page}`;
