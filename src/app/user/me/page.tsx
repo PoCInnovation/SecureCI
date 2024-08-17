@@ -124,7 +124,7 @@ export default function UserPage({ params }: UserProps) {
       </div>
       <div className="m-5 lg:m-10">
         <div className="flex flex-col lg:flex-row lg:justify-between">
-          <div className="dark:bg-dark-background border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
+          <div className="border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
             <div>
               <p className="text-slate-600 dark:text-white pt-2 text-sm">FOLLOWERS</p>
               <p className="text-4xl">{userData.followers}</p>
@@ -133,7 +133,7 @@ export default function UserPage({ params }: UserProps) {
               <UserRoundCheck color="green" className="h-10 w-10" />
             </div>
           </div>
-          <div className="dark:bg-dark-background border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
+          <div className="border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
             <div>
               <p className="text-slate-600 dark:text-white pt-2 text-sm">FOLLOWING</p>
               <p className="text-4xl">{userData.following}</p>
@@ -142,7 +142,7 @@ export default function UserPage({ params }: UserProps) {
               <UserRoundPlus color="blue" className="h-10 w-10" />
             </div>
           </div>
-          <div className="dark:bg-dark-background border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
+          <div className="border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
             <div>
               <p className="text-slate-600 dark:text-white pt-2 text-sm">PUBLIC REPOS</p>
               <p className="text-4xl">{userData.public_repos}</p>
@@ -151,7 +151,7 @@ export default function UserPage({ params }: UserProps) {
               <BookKey color="green" className="h-10 w-10" />
             </div>
           </div>
-          <div className="dark:bg-dark-background border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
+          <div className="border rounded-xl p-7 flex justify-between w-full lg:w-80 mb-5 lg:mb-0">
             <div>
               <p className="text-slate-600 dark:text-white pt-2 text-sm">PRIVATE REPOS</p>
               <p className="text-4xl">{userData.total_private_repos}</p>
@@ -164,7 +164,7 @@ export default function UserPage({ params }: UserProps) {
       </div>
       <div className="m-5 lg:m-10">
         <div className="lg:flex justify-between" style={{ width: "100%" }}>
-          <div className="dark:bg-dark-background border rounded-xl">
+          <div className="border rounded-xl">
             <div className='border-b flex justify-center'>
               <p className='text-xl p-5'>TOTAL CONTRIBUTION</p>
             </div>
@@ -176,7 +176,7 @@ export default function UserPage({ params }: UserProps) {
             )}
             </div>
           </div>
-          <div className="dark:bg-dark-background border rounded-xl" style={{ width: "40vw" }}>
+          <div className="border rounded-xl" style={{ width: "40vw" }}>
             <div className='border-b flex justify-center'>
               <p className='text-xl p-5'>PLAN</p>
             </div>
