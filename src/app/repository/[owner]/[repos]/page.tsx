@@ -185,7 +185,7 @@ export default function RepoPage(
 
     return (
         <div className="sm:pl-64 flex h-screen overflow-hidden">
-        <div className="lg:w-2/3 pt-10 h-full overflow-y-hidden">
+        <div className="lg:w-2/3 pt-10 h-full overflow-y-hidden border-r">
                 <h1 className="ml-10 pb-5 mr-5 text-xl border-b">
                     <strong>Dashboard</strong>
                 </h1>
@@ -351,7 +351,7 @@ export default function RepoPage(
             </div>
             <div className="bg-semi-light dark:bg-slate-900 lg:w-1/3 h-full overflow-y-hidden">
                 <div className="pt-10">
-                    <h1 className="ml-10 pb-2 mr-5 text-xl border-b">
+                    <h1 className="ml-10 pb-5 mr-5 text-xl border-b">
                         <strong>Overview</strong>
                     </h1>
                     <div className="lg:h-screen overflow-y-auto">
