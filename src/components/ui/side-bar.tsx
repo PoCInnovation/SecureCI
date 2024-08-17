@@ -94,14 +94,14 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
         className="fixed left-0 top-0 z-40 h-screen w-64 transition-transform"
         aria-label="Sidebar"
       >
-        <div className="flex h-full flex-col overflow-y-auto border-r border-slate-200 bg-white px-3 py-4 dark:border-slate-700 dark:bg-slate-900">
+        <div className="flex h-full flex-col overflow-y-auto border-r border-slate-200 dark:border-slate-700 bg-white px-3 py-4 dark:bg-slate-900">
           <div className="ml-3 mb-10">
             <div className="flex">
               <Image src={logo} alt="Secure-CI" width={30} height={30} />
               <p className="ml-2 mt-0.5">Secure-CI</p>
             </div>
           </div>
-          <div className="p-4 mb-1 flex items-center rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+          <div className="hover:bg-slate-100 dark:hover:bg-slate-700 w-11/12 mb-1 flex items-center rounded-lg ml-2 pl-1 py-2 text-slate-900 dark:text-white">
             <House className="mr-3 ml-1 h-6 w-6 dark:text-slate-100 text-slate-900" />
             <div>
               <DropdownMenu>
@@ -174,6 +174,7 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
             ))}
           </div>
           <div className="flex-grow"></div>
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-5"></div>
           <div onClick={() => router.replace('/user/me')} className="ml-2 p-2 flex w-11/12 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700">
             <User className="mr-3 h-6 w-6 dark:text-slate-100 text-slate-900" />
             <button>{session?.user?.name}</button>
