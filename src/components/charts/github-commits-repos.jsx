@@ -34,21 +34,19 @@ const ChartComponent = (props) => {
             lineY: am5.Line.new(root, { visible: true, strokeDasharray: [3, 3] })
         }));
 
-        cursor.lineY.set("visible", true);  // Affiche la ligne horizontale
-        cursor.lineX.set("visible", true);  // Affiche la ligne verticale
+        cursor.lineY.set("visible", true);
+        cursor.lineX.set("visible", true);
 
-        // Regrouper les commits par date
         const commitsByDate = {};
         props.commits.forEach(commit => {
             const date = new Date(commit.commit.author.date);
-            const dateString = date.toISOString().split('T')[0]; // Format 'YYYY-MM-DD'
+            const dateString = date.toISOString().split('T')[0]; 
             if (!commitsByDate[dateString]) {
                 commitsByDate[dateString] = 0;
             }
             commitsByDate[dateString]++;
         });
 
-        // Créer les données pour le graphique
         const data = Object.keys(commitsByDate).map(date => ({
             date: new Date(date).getTime(),
             value: commitsByDate[date]
@@ -105,7 +103,11 @@ const ChartComponent = (props) => {
             yAxis: sbValueAxis
         }));
 
-        // Remplacer les données en dur par les données des commits
+        series.fills.template.setAll({
+            fillOpacity: 0.2,
+            visible: true
+        });
+
         series.data.setAll(data);
         sbSeries.data.setAll(data);
 
