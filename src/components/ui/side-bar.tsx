@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Plus, User, Moon, Sun } from "lucide-react";
+import {LogOut, Plus, User, Moon, Sun, Folder} from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   DropdownMenu,
@@ -11,6 +11,7 @@ import {
 } from "./dropdown-menu/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation"
+import RepositoryPage from "@/app/repository/page";
 
 interface Organization {
   name: string;
@@ -106,6 +107,13 @@ const SideBar = ({ organizations, currentOrg }: SideBarChildrenProps) => {
                     {session?.user?.name}
                   </span>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Folder className="mr-2 h-4 w-4" />
+                  <span onClick={() => router.replace('/repository')}>
+                    Repositories
+                  </span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator/>
                 <DropdownMenuItem>
                 {darkMode ? <Moon className="mr-2 h-4 w-4" /> : <Sun className="mr-2 h-4 w-4"/>}
                   <span onClick={toggleDarkMode}>
