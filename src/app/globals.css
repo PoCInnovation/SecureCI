@@ -33,10 +33,27 @@
       --ring: 222.2 84% 4.9%;
 
       --radius: 0.5rem;
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+    
+      ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+      }
+    
+      ::-webkit-scrollbar-thumb {
+          background: #c5c5c58f;
+          border-radius: 5px;
+      }
+    
+      ::-webkit-scrollbar-thumb:hover {
+          background: #555;
+      }
     }
 
     .dark {
-      --background: 222.2 100% 0%;
+      --background: #001229;
       --foreground: 210 40% 98%;
 
       --card: 222.2 84% 4.9%;
@@ -63,6 +80,23 @@
       --border: 217.2 32.6% 17.5%;
       --input: 217.2 32.6% 17.5%;
       --ring: 212.7 26.8% 83.9%;
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+    
+      ::-webkit-scrollbar-track {
+          background: #000000;
+      }
+    
+      ::-webkit-scrollbar-thumb {
+          background: #ffffff;
+          border-radius: 5px;
+      }
+    
+      ::-webkit-scrollbar-thumb:hover {
+          background: #555;
+      }
     }
   }
 
@@ -73,4 +107,18 @@
     body {
       @apply bg-background text-foreground;
     }
+  }
+
+  @layer components {
+    .max-h-transition {
+      transition: max-height 1s ease-out;
+    }
+  }
+
+  .truncate-text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
   }

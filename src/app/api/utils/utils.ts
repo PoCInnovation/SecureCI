@@ -11,7 +11,7 @@ const fetchURL = async (req: NextRequest, url: string, method: string) => {
       method: method,
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/vnd.github+json',
       },
     });
 

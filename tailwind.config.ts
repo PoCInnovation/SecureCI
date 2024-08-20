@@ -22,13 +22,15 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: "var(--background)",
         foreground: "hsl(var(--foreground))",
         'dark-background': 'rgba(25, 25, 25, 0.83)',
         'plan-background': 'rgba(255, 3, 41, 0.37)',
         'collab-background': 'rgba(3, 137, 255, 0.37)',
         'private-background': 'rgba(255, 3, 179, 0.28)',
         'followers-background': 'rgba(3, 255, 58, 0.24)',
+        'semi-light': 'rgba(233, 242, 253, 0.8)',
+        'semi-dark': 'rgba(37, 37, 37, 0.77)',
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -76,6 +78,11 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      height: {
+        '110': '28rem',
+        '128': '32rem',
+        '144': '36rem',
       },
     },
   },
