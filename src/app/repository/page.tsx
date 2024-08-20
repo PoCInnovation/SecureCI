@@ -61,6 +61,15 @@ const RepositoryPage: React.FC = () => {
     const [currentOrg, setCurrentOrg] = useState<Organization | null>(null);
 
     useEffect(() => {
+        const mode = localStorage.getItem("darkMode");
+        if (mode === "true") {
+            theme === "light" ? setTheme("dark") : setTheme("light");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    }, []);
+
+    useEffect(() => {
         const fetchRepositories = async () => {
             try {
                 const session = await getSession();
@@ -123,9 +132,6 @@ const RepositoryPage: React.FC = () => {
         <>
             <div className={`container ${theme}`}>
                 <h1 className="title">Your Repositories</h1>
-                <button onClick={toggleTheme} className="theme-toggle">
-                    Switch to {theme === "light" ? "Dark" : "Light"} Theme
-                </button>
                 <ul className="repository-list">
                     {Array.isArray(repositories) && repositories.map((repo) => (
                         <li key={repo.id} className="repository-item">
