@@ -4,17 +4,52 @@ import React, { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import "./page.css";
 import { redirect } from "next/navigation";
+import { SideBar } from "@/components/ui/side-bar";
 
 interface Repository {
-    id: string;
+    id: number;
+    node_id: string;
     name: string;
-    owner?: {
-        avatar_url: string;
+    full_name: string;
+    private: boolean;
+    owner: {
         login: string;
+        id: number;
+        node_id: string;
+        avatar_url: string;
+        url: string;
+        html_url: string;
+        followers_url: string;
+        following_url: string;
+        gists_url: string;
+        starred_url: string;
+        subscriptions_url: string;
+        organizations_url: string;
+        repos_url: string;
+        events_url: string;
+        received_events_url: string;
+        type: string;
+        site_admin: boolean;
     };
-    version: string;
-    LastPush : string;
+    html_url: string;
+    description: string | null;
+    fork: boolean;
+    url: string;
+    created_at: string;
+    updated_at: string;
+    pushed_at: string;
+    homepage: string | null;
+    size: number;
+    stargazers_count: number;
+    watchers_count: number;
     language: string;
+    forks_count: number;
+    open_issues_count: number;
+    default_branch: string;
+}
+
+interface Organization {
+    name: string;
 }
 
 const RepositoryPage: React.FC = () => {
@@ -22,6 +57,8 @@ const RepositoryPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [theme, setTheme] = useState("light");
+    const [organizations, setOrganizations] = useState<Organization[]>([]);
+    const [currentOrg, setCurrentOrg] = useState<Organization | null>(null);
 
     useEffect(() => {
         const fetchRepositories = async () => {
@@ -46,7 +83,12 @@ const RepositoryPage: React.FC = () => {
                 }
 
                 const data: Repository[] = await response.json();
-                setRepositories(data);
+                console.log(data);
+                if (Array.isArray(data)) {
+                    setRepositories(data);
+                } else {
+                    throw new Error('Fetched data is not an array');
+                }
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'Unknown error');
             } finally {
@@ -58,7 +100,10 @@ const RepositoryPage: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        console.log("Repositories updated");
+        console.log("before");
         console.log(repositories);
+        console.log("after");
     }, [repositories]);
 
     const toggleTheme = () => {
@@ -82,20 +127,21 @@ const RepositoryPage: React.FC = () => {
                     Switch to {theme === "light" ? "Dark" : "Light"} Theme
                 </button>
                 <ul className="repository-list">
-                    {repositories.map((repo) => (
+                    {Array.isArray(repositories) && repositories.map((repo) => (
                         <li key={repo.id} className="repository-item">
                             <div className="repo-details">
                                 <h2>{repo.name}</h2>
                                 <span>Language: {repo.language}</span>
                             </div>
                             <div className="Owner">
-                                <p className="owner">Owner: {repo.owner?.login}</p>
+                                <p className="owner">Owner: {repo.owner.login}</p>
                             </div>
                             <img src={repo.owner.avatar_url} alt={repo.owner.login} className="avatar"/>
                         </li>
                     ))}
                 </ul>
             </div>
+            <SideBar organizations={organizations} currentOrg={currentOrg ?? { name: "Default Organization" }} />
         </>
     );
 };
