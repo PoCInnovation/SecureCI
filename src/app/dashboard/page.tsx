@@ -324,7 +324,7 @@ export default function Dashboard() {
                 type="text"
                 id="table-search"
                 className="block p-2 ps-10 text-sm text-gray-900 border rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-slate-400 dark:bg-gray-700 dark:placeholder-gray-400 dark:outline-none dark:text-white"
-                placeholder="Search for items"
+                placeholder="Search for repositories"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

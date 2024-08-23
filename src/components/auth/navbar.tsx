@@ -54,7 +54,7 @@ const Navbar = () => {
             <a onClick={() => { signIn('github', { callbackUrl: "/dashboard"})} } className="py-2 px-3 border rounded-md">
               Get started
             </a>
-            <button onClick={toggleDarkMode} className="py-2 px-3 border rounded-md">
+            <button onClick={toggleDarkMode} aria-label="Toggle dark mode" className="py-2 px-3 border rounded-md">
               {darkMode ? <Moon /> : <Sun />}
             </button>
           </div>
