@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import Loading from "../../../src/components/ui/loading";
 import { CircleAlert, ChevronsUp, GitGraph } from "lucide-react";
+import { MutableRefObject } from "react";
 
 interface Repository {
   id: string;
@@ -58,9 +59,9 @@ export default function Dashboard() {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef: MutableRefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside: (event: MouseEvent) => void = (event: MouseEvent): void => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setDropdownOpen(false);
     }
@@ -74,7 +75,7 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    const fetchRepositories = async () => {
+    const fetchRepositories: () => void = async () => {
       try {
         const reposResponse = await fetch('/api/repos/repository');
         if (!reposResponse.ok) {
@@ -119,7 +120,7 @@ export default function Dashboard() {
   }, [dropDownOption]);
 
   useEffect(() => {
-    const fetchCommits = async () => {
+    const fetchCommits: () => void = async () => {
       try {
         const allCommits: Commit[] = [];
         const counts: { repoName: string }[] = [];
@@ -178,8 +179,8 @@ export default function Dashboard() {
     console.log(recentCommits)
   } , [recentCommits])
 
-  const formatDate = (isoDateString: string) => {
-    const date = new Date(isoDateString);
+  const formatDate: (e: string) => string = (isoDateString: string): string => {
+    const date: Date = new Date(isoDateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
@@ -190,11 +191,11 @@ export default function Dashboard() {
     });
   };
 
-  const filteredRepos = repos.filter(repo =>
+  const filteredRepos: Repository[] = repos.filter(repo =>
     repo.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredCommits = recentCommits.filter(commit =>
+  const filteredCommits: Commit[] = recentCommits.filter(commit =>
     commit.commitMessage.toLowerCase().includes(searchTermCommits.toLowerCase())
   );
 

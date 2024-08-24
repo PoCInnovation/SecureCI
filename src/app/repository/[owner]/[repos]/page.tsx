@@ -114,46 +114,46 @@ export default function RepoPage(
     const [lastCommits, setLastCommits] = useState<CommitResponse[]>();
 
     useEffect(() => {
-        const fetchRepositories = async () => {
+        const fetchRepositories: () => void = async () => {
             try {
-                const response = await fetch(`/api/repos/${params.owner}/${params.repos}`);
+                const response: Response = await fetch(`/api/repos/${params.owner}/${params.repos}`);
         
                 if (!response.ok) {
                     throw new Error('Failed to fetch repositories');
                 }
 
-                const data : Repository = await response.json();
+                const data: Repository = await response.json();
                 setRepositories(data);
             } catch (err) {
                 console.log(err);
             }
         }
 
-        const fetchContributors = async () => {
+        const fetchContributors: () => void = async () => {
             try {
-                const response = await fetch(`/api/repos/${params.owner}/${params.repos}/contributors`);
+                const response: Response = await fetch(`/api/repos/${params.owner}/${params.repos}/contributors`);
         
                 if (!response.ok) {
                     throw new Error('Failed to fetch repositories');
                 }
 
-                const data : Contributor[] = await response.json();
+                const data: Contributor[] = await response.json();
                 setContributors(data);
             } catch (err) {
                 console.log(err);
             }
         }
 
-        const fetchCommits = async () => {
+        const fetchCommits: () => void = async () => {
             try {
-                const response = await fetch(`/api/repos/${params.owner}/${params.repos}/commits`);
+                const response: Response = await fetch(`/api/repos/${params.owner}/${params.repos}/commits`);
         
                 if (!response.ok) {
                     throw new Error('Failed to fetch repositories');
                 }
 
-                const data : CommitResponse[] = await response.json();
-                const topFiveCommits : CommitResponse[] = data.slice(0, 5).map(commit => commit);
+                const data: CommitResponse[] = await response.json();
+                const topFiveCommits: CommitResponse[] = data.slice(0, 5).map(commit => commit);
                 setLastCommits(topFiveCommits);
                 setCommits(data.map(commit => commit));
             } catch (err) {
@@ -161,9 +161,9 @@ export default function RepoPage(
             }
         }
 
-        fetchRepositories().catch(console.error);
-        fetchContributors().catch(console.error);
-        fetchCommits().catch(console.error);
+        fetchRepositories()
+        fetchContributors()
+        fetchCommits()
 
     }
     , []);
@@ -171,7 +171,7 @@ export default function RepoPage(
     useEffect(() => {
     }, [repositories, contributors, commits]);
 
-    const formatDate = (isoDateString: string) => {
+    const formatDate: (e: string) => string = (isoDateString: string): string => {
         const date: Date = new Date(isoDateString);
         return date.toLocaleDateString('en-US', {
             year: 'numeric',
