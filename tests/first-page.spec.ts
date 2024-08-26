@@ -12,26 +12,6 @@ test.describe("Home Page", () => {
   });
 });
 
-/*test.describe("Authentication", () => {
-  test('should authenticate using GitHub and redirect to Home Page', async ({ page }) => {
-    test.setTimeout(60000);
-
-    await page.goto('http://localhost:3000');
-
-    await page.waitForSelector('text=Get started', { state: 'visible', timeout: 60000 });
-
-    await page.screenshot({ path: 'screenshot-before-click.png' });
-
-    await page.click('text=Get started');
-
-    await page.screenshot({ path: 'screenshot-after-click.png' });
-
-    await page.waitForURL('http://localhost:3000/dashboard', { timeout: 60000 });
-
-    await expect(page).toHaveURL('http://localhost:3000/dashboard');
-  });
-});*/
-
 test.describe("Navbar Dark/Light Mode Toggle", () => {
   test('should toggle dark mode on button click', async ({ page }) => {
 
