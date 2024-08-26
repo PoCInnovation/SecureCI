@@ -111,13 +111,6 @@ const RepositoryPage: React.FC = () => {
         fetchRepositories().catch(console.error);
     }, []);
 
-    /*useEffect(() => {
-        console.log("Repositories updated");
-        console.log("before");
-        console.log(repositories);
-        console.log("after");
-    }, [repositories]);*/
-
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     };
@@ -136,7 +129,6 @@ const RepositoryPage: React.FC = () => {
             <div className={`container ${theme}`}>
                 <h1 className="title">Your Repositories</h1>
                 {repositories.map((repo) => (
-                    // eslint-disable-next-line react/jsx-key
                     <div>
                 <ul className="repository-list">
                     {Array.isArray(repositories) && repositories.map((repo) => (
