@@ -5,6 +5,7 @@ import { getSession } from "next-auth/react";
 import "./page.css";
 import { redirect } from "next/navigation";
 import { SideBar } from "@/components/ui/side-bar";
+import { useRouter } from "next/navigation"
 
 interface Repository {
     id: number;
@@ -60,6 +61,8 @@ const RepositoryPage: React.FC = () => {
     const [organizations, setOrganizations] = useState<Organization[]>([]);
     const [currentOrg, setCurrentOrg] = useState<Organization | null>(null);
 
+    const router = useRouter();
+
     useEffect(() => {
         const mode = localStorage.getItem("darkMode");
         if (mode === "true") {
@@ -108,13 +111,6 @@ const RepositoryPage: React.FC = () => {
         fetchRepositories().catch(console.error);
     }, []);
 
-    useEffect(() => {
-        console.log("Repositories updated");
-        console.log("before");
-        console.log(repositories);
-        console.log("after");
-    }, [repositories]);
-
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     };
@@ -132,9 +128,11 @@ const RepositoryPage: React.FC = () => {
         <>
             <div className={`container ${theme}`}>
                 <h1 className="title">Your Repositories</h1>
+                {repositories.map((repo) => (
+                    <div>
                 <ul className="repository-list">
                     {Array.isArray(repositories) && repositories.map((repo) => (
-                        <li key={repo.id} className="repository-item">
+                        <li key={repo.id} className="repository-item" onClick={() => router.replace('/repository/' + repo.owner.login + '/' + repo.name)}>
                             <div className="repo-details">
                                 <h2>{repo.name}</h2>
                                 <span>Language: {repo.language}</span>
@@ -146,6 +144,9 @@ const RepositoryPage: React.FC = () => {
                         </li>
                     ))}
                 </ul>
+                    </div>
+
+                ))}
             </div>
             <SideBar organizations={organizations} currentOrg={currentOrg ?? { name: "Default Organization" }} />
         </>
