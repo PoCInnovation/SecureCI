@@ -7,7 +7,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 
 const Navbar = () => {
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const toggleNavbar = () => {
@@ -54,7 +54,7 @@ const Navbar = () => {
             <a onClick={() => { signIn('github', { callbackUrl: "/dashboard"})} } className="py-2 px-3 border rounded-md">
               Get started
             </a>
-            <button onClick={toggleDarkMode} className="py-2 px-3 border rounded-md">
+            <button onClick={toggleDarkMode} aria-label="Toggle dark mode" className="py-2 px-3 border rounded-md">
               {darkMode ? <Moon /> : <Sun />}
             </button>
           </div>

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@amcharts/amcharts5": "^5.10.1",
@@ -46,6 +48,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.46.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
