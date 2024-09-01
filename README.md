@@ -6,11 +6,12 @@ Scan automatically your codebase for vulnerabilities, after each push.
 
 ## Installation
 
-Install the [SecureCI Github app](https://github.com/apps/secureci-app) on your repository.
+Install the [SecureCI Github app](https://github.com/apps/secureci-app).
+Select the repositories where you want to scan your codebase.
 
 Fill out the missing fields of .env file, for front-end and back-end.
 
-Add the [Semgrep workflow](./back-end/semgrep-workflow/semgrep.yml) to your repository.
+Add the [Semgrep workflow](./back-end/semgrep-workflow/semgrep.yml) to the selected repositories.
 
 ## Usage
 
