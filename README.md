@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SecureCI
+
+Scan automatically your codebase for vulnerabilities, after each push.
 
 ## Getting Started
 
-First, run the development server:
+## Installation
 
-```bash
+Install the [SecureCI Github app](https://github.com/apps/secureci-app) on your repository.
+
+Fill out the missing fields of the .env file.
+
+Add the [Semgrep workflow](./back-end/semgrep-workflow/semgrep.yml) to your repository.
+
+## Usage
+
+Run the front-end.
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Back-end
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run the server.
+```
+cd back-end
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run the following command on a different terminal, to forward the webhook to the server.
+```
+npm run webhook
+```
 
-## Learn More
+## Our PoC team ❤️
 
-To learn more about Next.js, take a look at the following resources:
+Developers  
+| [<img src="https://github.com/quentinbol.png?size=85" width=85><br><sub>Quentin BOLLORE</sub>](https://github.com/quentinbol) | [<img src="https://github.com/eliestroun14.png?size=85" width=85><br><sub>Elie STROUN</sub>](https://github.com/eliestroun14) | [<img src="https://github.com/sephorah.png?size=85" width=85><br><sub>Séphorah ANIAMBOSSOU</sub>](https://github.com/sephorah)
+| :---: | :---: | :---:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Managers
+| [<img src="https://github.com/adamdeziri.png?size=85" width=85><br><sub>Adam DEZIRI</sub>](https://github.com/adamdeziri) | [<img src="https://github.com/pierrelissope.png?size=85" width=85><br><sub>Pierre LISSOPE</sub>](https://github.com/pierrelissope)
+| :---: | :---:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<h2 align=center>
+Organization
+</h2>
 
-## Deploy on Vercel
+<p align='center'>
+    <a href="https://www.linkedin.com/company/pocinnovation/mycompany/">
+        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn logo">
+    </a>
+    <a href="https://www.instagram.com/pocinnovation/">
+        <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram logo"
+>
+    </a>
+    <a href="https://twitter.com/PoCInnovation">
+        <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter logo">
+    </a>
+    <a href="https://discord.com/invite/Yqq2ADGDS7">
+        <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" alt="Discord logo">
+    </a>
+</p>
+<p align=center>
+    <a href="https://www.poc-innovation.fr/">
+        <img src="https://img.shields.io/badge/WebSite-1a2b6d?style=for-the-badge&logo=GitHub Sponsors&logoColor=white" alt="Website logo">
+    </a>
+</p>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> 🚀 Don't hesitate to follow us on our different networks, and put a star 🌟 on `PoC's` repositories
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> Made with ❤️ by PoC
