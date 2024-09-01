@@ -8,7 +8,7 @@ Scan automatically your codebase for vulnerabilities, after each push.
 
 Install the [SecureCI Github app](https://github.com/apps/secureci-app) on your repository.
 
-Fill out the missing fields of the .env file.
+Fill out the missing fields of .env file, for front-end and back-end.
 
 Add the [Semgrep workflow](./back-end/semgrep-workflow/semgrep.yml) to your repository.
 
