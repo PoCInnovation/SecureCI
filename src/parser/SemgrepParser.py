@@ -14,7 +14,7 @@ if not os.path.exists(output_folder_path):
 
 # Find the most recent .sarif file in the folder
 list_of_sarif_files = glob.glob(os.path.join(sarif_folder_path, '*.sarif'))
-latest_sarif_file = max(list_of_sarif_files, key=os.path.getctime)
+latest_sarif_file = max(list_of_sarif_files, key=os.path.getmtime)
 
 # Load SARIF file
 with open(latest_sarif_file, 'r') as file:
